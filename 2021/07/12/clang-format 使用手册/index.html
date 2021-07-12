@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="dzh">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="dzh">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="clang-format 使用手册背景介绍该程序能够自动化格式 C&#x2F;C++&#x2F;Obj-C 代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义 style（通过编写 .clang-format 文件）。 安装ubuntu安装clang-format1sudo apt-get install clang-format  手动安装clang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="clang-format 使用手册">
+<meta property="og:url" content="https://duan-zhenghong.github.io/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="徵弘&#39;s Blog">
+<meta property="og:description" content="clang-format 使用手册背景介绍该程序能够自动化格式 C&#x2F;C++&#x2F;Obj-C 代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义 style（通过编写 .clang-format 文件）。 安装ubuntu安装clang-format1sudo apt-get install clang-format  手动安装clang">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-11T17:16:30.000Z">
+<meta property="article:modified_time" content="2021-07-12T15:46:36.934Z">
+<meta property="article:author" content="dzh">
+<meta property="article:tag" content="vscode">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>clang-format 使用手册 · 徵弘&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/dzh.github.io/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/dzh.github.io/css/style.css?v=20210204" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/dzh.github.io/css/mobile.css?v=20210204" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/dzh.github.io/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/dzh.github.io/scripts/main.js?v=20210204" as="script" />
+    <link rel="preload" as="font" href="/dzh.github.io/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/js/all.min.js"  data-auto-replace-svg="nest" ></script>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <!-- top read progress line -->
+    <div class="header-element">
+        
+        <div class="read-progress"></div>
+        
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+        <div class="header-sidebar-menu">
+        
+            
+            <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- back to home page text -->
+    <a class="home-link header-element" href=/dzh.github.io/>徵弘's Studio.</a>
+    <!-- toggle banner for post layout -->
+    
+    
+    <div class="banner">
+    
+        <div class="blog-title header-element">
+            <a href="/dzh.github.io/" >徵弘&#39;s Studio.</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">clang-format 使用手册</a>
+        </div>
+    </div>
+    
+</header>
+    
+<footer class="footer-fixed">
+
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+        <div class="back-top">
+        
+            
+            <div>&#xe639;</div>
+            
+        </div>
+    </div>
+</footer>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/dzh.github.io/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            clang-format 使用手册
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "vscode">vscode</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.9k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/07/12</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/dzh.github.io/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/dzh.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="clang-format-使用手册"><a href="#clang-format-使用手册" class="headerlink" title="clang-format 使用手册"></a>clang-format 使用手册</h1><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>该程序能够自动化格式 C/C++/Obj-C 代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义 style（通过编写 .clang-format 文件）。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="ubuntu安装clang-format"><a href="#ubuntu安装clang-format" class="headerlink" title="ubuntu安装clang-format"></a>ubuntu安装clang-format</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install clang-format</span><br></pre></td></tr></table></figure>
+
+<h3 id="手动安装clang-format"><a href="#手动安装clang-format" class="headerlink" title="手动安装clang-format"></a>手动安装clang-format</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz">下载</a> 文件clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz</span><br></pre></td></tr></table></figure></li>
+<li><p>解压文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>解压目录如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── include</span><br><span class="line">├── lib</span><br><span class="line">├── libexec</span><br><span class="line">└── share</span><br></pre></td></tr></table></figure>
+
+<p>bin 文件中有 clang-format 的可执行文件</p>
+</li>
+<li><p>将clang-format放入 <code>/usr/bin</code>目录下完成安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv .clang-format /usr/bin</span><br></pre></td></tr></table></figure></li>
+<li><p>查看版本如下，安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@dzh-pc:/# clang-format-10 -version</span><br><span class="line">clang-format version 10.0.0-4ubuntu1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="vscode中使用clang-format"><a href="#vscode中使用clang-format" class="headerlink" title="vscode中使用clang-format"></a>vscode中使用clang-format</h2><h3 id="部署-clang-format文件"><a href="#部署-clang-format文件" class="headerlink" title="部署 .clang-format文件"></a>部署 <code>.clang-format</code>文件</h3><p>在工程根目录下新建 <code>.clang-format</code> 文件，填入规则，如下是基于google的格式进行修改的一个例子，仅供参考</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br></pre></td><td class="code"><pre><span class="line"># 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto</span><br><span class="line">Language: Cpp</span><br><span class="line"># BasedOnStyle:	LLVM</span><br><span class="line"></span><br><span class="line"># 访问说明符(public、private等)的偏移</span><br><span class="line">AccessModifierOffset: -4</span><br><span class="line"></span><br><span class="line"># 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)</span><br><span class="line">AlignAfterOpenBracket: Align</span><br><span class="line"></span><br><span class="line"># 连续赋值时，对齐所有等号</span><br><span class="line">AlignConsecutiveAssignments: false</span><br><span class="line"></span><br><span class="line"># 连续声明时，对齐所有声明的变量名</span><br><span class="line">AlignConsecutiveDeclarations: false</span><br><span class="line"></span><br><span class="line"># 右对齐逃脱换行(使用反斜杠换行)的反斜杠</span><br><span class="line">AlignEscapedNewlines: Right</span><br><span class="line"></span><br><span class="line"># 水平对齐二元和三元表达式的操作数</span><br><span class="line">AlignOperands: true</span><br><span class="line"></span><br><span class="line"># 对齐连续的尾随的注释</span><br><span class="line">AlignTrailingComments: true</span><br><span class="line"></span><br><span class="line"># 不允许函数声明的所有参数在放在下一行</span><br><span class="line">AllowAllParametersOfDeclarationOnNextLine: false</span><br><span class="line"></span><br><span class="line"># 不允许短的块放在同一行</span><br><span class="line">AllowShortBlocksOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 允许短的case标签放在同一行</span><br><span class="line">AllowShortCaseLabelsOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 允许短的函数放在同一行: None, InlineOnly(定义在类中), Empty(空函数), Inline(定义在类中，空函数), All</span><br><span class="line">AllowShortFunctionsOnASingleLine: None</span><br><span class="line"></span><br><span class="line"># 允许短的if语句保持在同一行</span><br><span class="line">AllowShortIfStatementsOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 允许短的循环保持在同一行</span><br><span class="line">AllowShortLoopsOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 总是在返回类型后换行: None, All, TopLevel(顶级函数，不包括在类中的函数), </span><br><span class="line"># AllDefinitions(所有的定义，不包括声明), TopLevelDefinitions(所有的顶级函数的定义)</span><br><span class="line">AlwaysBreakAfterReturnType: None</span><br><span class="line"></span><br><span class="line"># 总是在多行string字面量前换行</span><br><span class="line">AlwaysBreakBeforeMultilineStrings: false</span><br><span class="line"></span><br><span class="line"># 总是在template声明后换行</span><br><span class="line">AlwaysBreakTemplateDeclarations: true</span><br><span class="line"></span><br><span class="line"># false表示函数实参要么都在同一行，要么都各自一行。 false时看是否超出ColumnLimit的限制</span><br><span class="line">BinPackArguments: true</span><br><span class="line"></span><br><span class="line"># false表示所有形参要么都在同一行，要么都各自一行</span><br><span class="line">BinPackParameters: true</span><br><span class="line"></span><br><span class="line"># 大括号换行，只有当BreakBeforeBraces设置为Custom时才有效</span><br><span class="line">BraceWrapping:</span><br><span class="line">  # class定义后面</span><br><span class="line">  AfterClass: false</span><br><span class="line">  # 控制语句后面</span><br><span class="line">  AfterControlStatement: false</span><br><span class="line">  # enum定义后面</span><br><span class="line">  AfterEnum: false</span><br><span class="line">  # 函数定义后面</span><br><span class="line">  AfterFunction: false</span><br><span class="line">  # 命名空间定义后面</span><br><span class="line">  AfterNamespace: false</span><br><span class="line">  # struct定义后面</span><br><span class="line">  AfterStruct: false</span><br><span class="line">  # union定义后面</span><br><span class="line">  AfterUnion: false</span><br><span class="line">  # extern之后</span><br><span class="line">  AfterExternBlock: false</span><br><span class="line">  # catch之前</span><br><span class="line">  BeforeCatch: false</span><br><span class="line">  # else之前</span><br><span class="line">  BeforeElse: false</span><br><span class="line">  # 缩进大括号</span><br><span class="line">  IndentBraces: false</span><br><span class="line">  # 分离空函数</span><br><span class="line">  SplitEmptyFunction: false</span><br><span class="line">  # 分离空语句</span><br><span class="line">  SplitEmptyRecord: false</span><br><span class="line">  # 分离空命名空间</span><br><span class="line">  SplitEmptyNamespace: false</span><br><span class="line"></span><br><span class="line"># 在二元运算符前换行: None(在操作符后换行), NonAssignment(在非赋值的操作符前换行), All(在操作符前换行)</span><br><span class="line">BreakBeforeBinaryOperators: NonAssignment</span><br><span class="line"></span><br><span class="line"># 在大括号前换行: Attach(始终将大括号附加到周围的上下文), Linux(除函数、命名空间和类定义，与Attach类似), </span><br><span class="line">#   Mozilla(除枚举、函数、记录定义，与Attach类似), Stroustrup(除函数定义、catch、else，与Attach类似), </span><br><span class="line">#   Allman(总是在大括号前换行), GNU(总是在大括号前换行，并对于控制语句的大括号增加额外的缩进), WebKit(在函数前换行), Custom</span><br><span class="line">#   注：这里认为语句块也属于函数</span><br><span class="line">BreakBeforeBraces: Custom</span><br><span class="line"></span><br><span class="line"># 在三元运算符前换行</span><br><span class="line">BreakBeforeTernaryOperators: false</span><br><span class="line"></span><br><span class="line"># 在构造函数的初始化列表的冒号后换行</span><br><span class="line">BreakConstructorInitializers: AfterColon</span><br><span class="line"></span><br><span class="line">#BreakInheritanceList: AfterColon</span><br><span class="line"></span><br><span class="line">BreakStringLiterals: false</span><br><span class="line"></span><br><span class="line"># 每行字符的限制，0表示没有限制， </span><br><span class="line">ColumnLimit: 120</span><br><span class="line"></span><br><span class="line">CompactNamespaces: true</span><br><span class="line"></span><br><span class="line"># 构造函数的初始化列表要么都在同一行，要么都各自一行</span><br><span class="line">ConstructorInitializerAllOnOneLineOrOnePerLine: false</span><br><span class="line"></span><br><span class="line"># 构造函数的初始化列表的缩进宽度</span><br><span class="line">ConstructorInitializerIndentWidth: 4</span><br><span class="line"></span><br><span class="line"># 延续的行的缩进宽度</span><br><span class="line">ContinuationIndentWidth: 4</span><br><span class="line"></span><br><span class="line"># 去除C++11的列表初始化的大括号&#123;后和&#125;前的空格</span><br><span class="line">Cpp11BracedListStyle: true</span><br><span class="line"></span><br><span class="line"># 继承最常用的指针和引用的对齐方式</span><br><span class="line">DerivePointerAlignment: false</span><br><span class="line"></span><br><span class="line"># 固定命名空间注释</span><br><span class="line">FixNamespaceComments: true</span><br><span class="line"></span><br><span class="line"># 缩进case标签</span><br><span class="line">IndentCaseLabels: false</span><br><span class="line"></span><br><span class="line">IndentPPDirectives: None</span><br><span class="line"></span><br><span class="line"># 缩进宽度</span><br><span class="line">IndentWidth: 4</span><br><span class="line"></span><br><span class="line"># 函数返回类型换行时，缩进函数声明或函数定义的函数名</span><br><span class="line">IndentWrappedFunctionNames: false</span><br><span class="line"></span><br><span class="line"># 保留在块开始处的空行</span><br><span class="line">KeepEmptyLinesAtTheStartOfBlocks: false</span><br><span class="line"></span><br><span class="line"># 连续空行的最大数量</span><br><span class="line">MaxEmptyLinesToKeep: 1</span><br><span class="line"></span><br><span class="line"># 命名空间的缩进: None, Inner(缩进嵌套的命名空间中的内容), All</span><br><span class="line">NamespaceIndentation: None</span><br><span class="line"></span><br><span class="line"># 指针和引用的对齐: Left, Right, Middle</span><br><span class="line">PointerAlignment: Right</span><br><span class="line"></span><br><span class="line"># 允许重新排版注释</span><br><span class="line">ReflowComments: true</span><br><span class="line"></span><br><span class="line"># 允许排序#include</span><br><span class="line">SortIncludes: false</span><br><span class="line"></span><br><span class="line"># 允许排序 using 声明</span><br><span class="line">SortUsingDeclarations: false</span><br><span class="line"></span><br><span class="line"># 在C风格类型转换后添加空格</span><br><span class="line">SpaceAfterCStyleCast: false</span><br><span class="line"></span><br><span class="line"># 在Template 关键字后面添加空格</span><br><span class="line">SpaceAfterTemplateKeyword: true</span><br><span class="line"></span><br><span class="line"># 在赋值运算符之前添加空格</span><br><span class="line">SpaceBeforeAssignmentOperators: true</span><br><span class="line"></span><br><span class="line"># SpaceBeforeCpp11BracedList: true</span><br><span class="line"></span><br><span class="line"># SpaceBeforeCtorInitializerColon: true</span><br><span class="line"></span><br><span class="line"># SpaceBeforeInheritanceColon: true</span><br><span class="line"></span><br><span class="line"># 开圆括号之前添加一个空格: Never, ControlStatements, Always</span><br><span class="line">SpaceBeforeParens: ControlStatements</span><br><span class="line"></span><br><span class="line"># SpaceBeforeRangeBasedForLoopColon: true</span><br><span class="line"></span><br><span class="line"># 在空的圆括号中添加空格</span><br><span class="line">SpaceInEmptyParentheses: false</span><br><span class="line"></span><br><span class="line"># 在尾随的评论前添加的空格数(只适用于//)</span><br><span class="line">SpacesBeforeTrailingComments: 1</span><br><span class="line"></span><br><span class="line"># 在尖括号的&lt;后和&gt;前添加空格</span><br><span class="line">SpacesInAngles: false</span><br><span class="line"></span><br><span class="line"># 在C风格类型转换的括号中添加空格</span><br><span class="line">SpacesInCStyleCastParentheses: false</span><br><span class="line"></span><br><span class="line"># 在容器(ObjC和JavaScript的数组和字典等)字面量中添加空格</span><br><span class="line">SpacesInContainerLiterals: true</span><br><span class="line"></span><br><span class="line"># 在圆括号的(后和)前添加空格</span><br><span class="line">SpacesInParentheses: false</span><br><span class="line"></span><br><span class="line"># 在方括号的[后和]前添加空格，lamda表达式和未指明大小的数组的声明不受影响</span><br><span class="line">SpacesInSquareBrackets: false</span><br><span class="line"></span><br><span class="line"># 标准: Cpp03, Cpp11, Auto</span><br><span class="line">Standard: Cpp11</span><br><span class="line"></span><br><span class="line"># tab宽度</span><br><span class="line">TabWidth: 4</span><br><span class="line"></span><br><span class="line"># 使用tab字符: Never, ForIndentation, ForContinuationAndIndentation, Always</span><br><span class="line">UseTab: Never</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启自动格式化"><a href="#开启自动格式化" class="headerlink" title="开启自动格式化"></a>开启自动格式化</h3><p>在vscode配置文件目录中添加文件settings.json，保存文档时会触发自动格式化。内容填写如下（该设置仅针对该工程）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	    &quot;editor.formatOnSave&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者在设置中搜索 <code>format on save</code>，勾选对应选项即可（该设置针对全局）</p>
+<h3 id="指定clang-format位置"><a href="#指定clang-format位置" class="headerlink" title="指定clang-format位置"></a>指定clang-format位置</h3><p>在settings中添加如下内容,填入clang-format的绝对路径，没有进行如下配置，clang-format</p>
+<p>插件会尝试在PATH中查找：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;clang-format.executable&quot;: &quot;/usr/bin/clang-format&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>This extension will attempt to find clang-format on your <code>PATH</code>. Alternatively, the clang-format executable can be specified in your vscode settings.json file:</p>
+</blockquote>
+<p>或者在vscode的设置中搜索 <code>clang-format.executable</code> ，显式指定clang-format的绝对路径即可。</p>
+<h3 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h3><ul>
+<li>手动：在代码中右键点击 <code>Format Document</code> 或者使用快捷键 <code>ctrl + shift + f</code> </li>
+</ul>
+<ul>
+<li>自动： <code>ctrl + s</code> 保存文档，触发自动格式化（前提是要开启自动化选，上文有提到开启方法）</li>
+</ul>
+<ul>
+<li><p>批量格式化：find ./dirname  -iname “*.h” -o -iname “*.c” | xargs clang-format -style=file -i</p>
+<blockquote>
+<p>对文件夹下的文件一起进行格式化</p>
+<p>./dirname 为文件夹目录</p>
+<p>-iname 指按名字匹配文件，且不区分大小写</p>
+<p>-o 同 -or，表示or的意思，这里指查找”*.h” 和”*.c”的文件。类似的还有 -a (meaning logical AND).</p>
+<p>xargs 是一个强有力的命令，它能够捕获一个命令的输出，然后传递给另外一个命令；xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行；xargs 默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="https://releases.llvm.org/download.html">https://releases.llvm.org/download.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=xaver.clang-format">clang-format 插件使用说明</a></p>
+<p><a target="_blank" rel="noopener" href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html">https://clang.llvm.org/docs/ClangFormatStyleOptions.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html">find命令介绍</a></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://duan-zhenghong.github.io/dzh.github.io">dzh</a>
+            <p>原文链接：<a href="https://duan-zhenghong.github.io/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">https://duan-zhenghong.github.io/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</a>
+            <p>发表日期：<a href="https://duan-zhenghong.github.io/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">July 12th 2021, 1:16:30 am</a>
+            <p>更新日期：<a href="https://duan-zhenghong.github.io/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">July 12th 2021, 11:46:36 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/dzh.github.io/2021/07/12/SSH%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/" title= "SSH免密登陆设置">
+                    <div class="nextTitle">SSH免密登陆设置</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/dzh.github.io/2021/07/12/git%20%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" title= "git 命令总结">
+                    <div class="prevTitle">git 命令总结</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+     
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+</main>
+
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:hw.d@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                    
+                    <img class="profile-qr" src="/dzh.github.io/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#clang-format-%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="toc-number">1.</span> <span class="toc-text">clang-format 使用手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu%E5%AE%89%E8%A3%85clang-format"><span class="toc-number">1.2.1.</span> <span class="toc-text">ubuntu安装clang-format</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85clang-format"><span class="toc-number">1.2.2.</span> <span class="toc-text">手动安装clang-format</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vscode%E4%B8%AD%E4%BD%BF%E7%94%A8clang-format"><span class="toc-number">1.3.</span> <span class="toc-text">vscode中使用clang-format</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2-clang-format%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">部署 .clang-format文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%87%AA%E5%8A%A8%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">1.3.2.</span> <span class="toc-text">开启自动格式化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9Aclang-format%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.3.3.</span> <span class="toc-text">指定clang-format位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.4.</span> <span class="toc-text">格式化代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+    
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 8
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/SSH%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/" >SSH免密登陆设置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" >clang-format 使用手册</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/git%20%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" >git 命令总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/linux/" >linux 命令学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/11</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/11/hello-world/" >Hello World</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/md&typora/" >[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >python学习笔记</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/windows%E5%91%BD%E4%BB%A4%E8%A1%8C/" >[Untitled Post]</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
+    
+        <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
+    
+        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/dzh.github.io/",
+        author: "dzh"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/dzh.github.io/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/dzh.github.io/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/dzh.github.io/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
