@@ -1,1069 +1,2299 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
-    <!-- title -->
 
 
 
-
-<!-- keywords -->
-
+  
 
 
-
+<html class="theme-next muse use-motion" lang="zh_CN">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <meta name="author" content="dzh">
-    <meta name="renderer" content="webkit">
-    <meta name="copyright" content="dzh">
-    
-    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
-    
-    <meta name="description" content="">
-    <meta property="og:type" content="website">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/dzh.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/dzh.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/dzh.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/dzh.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/dzh.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/dzh.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/dzh.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
 <meta property="og:title" content="徵弘&#39;s Blog">
 <meta property="og:url" content="https://duan-zhenghong.github.io/dzh.github.io/index.html">
 <meta property="og:site_name" content="徵弘&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="dzh">
 <meta name="twitter:card" content="summary">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    
-    <title>徵弘&#39;s Studio</title>
-    <style type="text/css">
-    @font-face {
-        font-family: 'Oswald-Regular';
-        src: url("/dzh.github.io/font/Oswald-Regular.ttf");
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
-
-    body {
-        margin: 0;
-    }
-
-    header,
-    footer,
-    .back-top,
-    .sidebar,
-    .container,
-    .site-intro-meta,
-    .toc-wrapper {
-        display: none;
-    }
-
-    .site-intro {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        /* height: 50vh; */
-        overflow: hidden;
-    }
-
-    .site-intro-placeholder {
-        position: absolute;
-        z-index: -2;
-        top: 0;
-        left: 0;
-        width: calc(100% + 300px);
-        height: 100%;
-        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
-        background-position: center center;
-        transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s infinite;
-    }
-
-    @keyframes gradient-move {
-        0% {
-            transform: translate3d(-226px, 0, 0);
-        }
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-</style>
-
-    <link rel="preload" href= "/dzh.github.io/css/style.css?v=20210204" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="stylesheet" href= "/dzh.github.io/css/mobile.css?v=20210204" media="(max-width: 980px)">
-    
-    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-/* This file is meant as a standalone workflow for
-- testing support for link[rel=preload]
-- enabling async CSS loading in browsers that do not support rel=preload
-- applying rel preload css once loaded, whether supported or not.
-*/ -->
-<script>
-(function( w ){
-	"use strict";
-	// rel=preload support test
-	if( !w.loadCSS ){
-		w.loadCSS = function(){};
-	}
-	// define on the loadCSS obj
-	var rp = loadCSS.relpreload = {};
-	// rel=preload feature support test
-	// runs once and returns a function for compat purposes
-	rp.support = (function(){
-		var ret;
-		try {
-			ret = w.document.createElement( "link" ).relList.supports( "preload" );
-		} catch (e) {
-			ret = false;
-		}
-		return function(){
-			return ret;
-		};
-	})();
-
-	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-	// then change that media back to its intended value on load
-	rp.bindMediaToggle = function( link ){
-		// remember existing media attr for ultimate state, or default to 'all'
-		var finalMedia = link.media || "all";
-
-		function enableStylesheet(){
-			link.media = finalMedia;
-		}
-
-		// bind load handlers to enable media
-		if( link.addEventListener ){
-			link.addEventListener( "load", enableStylesheet );
-		} else if( link.attachEvent ){
-			link.attachEvent( "onload", enableStylesheet );
-		}
-
-		// Set rel and non-applicable media type to start an async request
-		// note: timeout allows this to happen async to let rendering continue in IE
-		setTimeout(function(){
-			link.rel = "stylesheet";
-			link.media = "only x";
-		});
-		// also enable media after 3 seconds,
-		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-		setTimeout( enableStylesheet, 3000 );
-	};
-
-	// loop through link elements in DOM
-	rp.poly = function(){
-		// double check this to prevent external calls from running
-		if( rp.support() ){
-			return;
-		}
-		var links = w.document.getElementsByTagName( "link" );
-		for( var i = 0; i < links.length; i++ ){
-			var link = links[ i ];
-			// qualify links to those with rel=preload and as=style attrs
-			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
-				// prevent rerunning on link
-				link.setAttribute( "data-loadcss", true );
-				// bind listeners to toggle media back
-				rp.bindMediaToggle( link );
-			}
-		}
-	};
-
-	// if unsupported, run the polyfill
-	if( !rp.support() ){
-		// run once at least
-		rp.poly();
-
-		// rerun poly on an interval until onload
-		var run = w.setInterval( rp.poly, 500 );
-		if( w.addEventListener ){
-			w.addEventListener( "load", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		} else if( w.attachEvent ){
-			w.attachEvent( "onload", function(){
-				rp.poly();
-				w.clearInterval( run );
-			} );
-		}
-	}
-
-
-	// commonjs
-	if( typeof exports !== "undefined" ){
-		exports.loadCSS = loadCSS;
-	}
-	else {
-		w.loadCSS = loadCSS;
-	}
-}( typeof global !== "undefined" ? global : this ) );
+  };
 </script>
 
-    <link rel="icon" href= "/dzh.github.io/assets/favicon.ico" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
-    <link rel="preload" href="/dzh.github.io/scripts/main.js?v=20210204" as="script" />
-    <link rel="preload" as="font" href="/dzh.github.io/font/Oswald-Regular.ttf" crossorigin>
-    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
-    <script src="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/js/all.min.js"  data-auto-replace-svg="nest" ></script>
-    
-    <!-- fancybox -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
-    <!-- 百度统计  -->
-    
-    <!-- 谷歌统计  -->
-    
+
+
+  <link rel="canonical" href="https://duan-zhenghong.github.io/dzh.github.io/"/>
+
+
+
+
+
+  <title>徵弘's Blog</title>
+  
+
+
+
+
+
+
+
+
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-    
-        <body class="home-body">
-    
-    
-<header class="header index-header">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
 
-    <!-- top read progress line -->
-    <div class="header-element">
-        
-        <div class="read-progress"></div>
-        
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/dzh.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">徵弘's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <!-- sidebar menu button -->
-    <div class="header-element">
-        
-        <div class="header-sidebar-menu">
-        
-            
-            <div style="padding-left: 1px;">&#xe775;</div>
-            
-        </div>
-    </div>
-    <!-- back to home page text -->
-    <a class="home-link header-element" href=/dzh.github.io/>徵弘's Studio.</a>
-    <!-- toggle banner for post layout -->
-    
-</header>
-    
-<footer class="footer-fixed index-footer-fixed">
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
 
-    <!-- back to top button -->
-    <div class="footer-fixed-element">
-        
-        <div class="back-top">
-        
-            
-            <div>&#xe639;</div>
-            
-        </div>
-    </div>
-</footer>
-    <div class="wrapper">
-        <div class="site-intro" style="
-
-
-
-
-
-
-
-height:50vh;
-">
-    
-    <!-- 主页  -->
-    
-    
-    <!-- 文章页  -->
-            
-    <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/dzh.github.io/intro/index-bg.jpg)"></div>
-    <div class="site-intro-meta">
-        <!-- 标题  -->
-        <h1 class="intro-title">
-            <!-- 主页  -->
-            
-            徵弘's Studio.
-            <!-- 文章页  -->
-            
-        </h1>
-        <!-- 副标题 -->
-        <p class="intro-subtitle">
-            <!-- 主页副标题  -->
-            
-            
-                it's better to burn out than to fade away
-            
-            <!-- 文章页  -->
-            
-        </p>
-        <!-- 文章页meta -->
-        
-    </div>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
-        <script>
- 
-  // get user agent
-  var browser = {
-    versions: function () {
-      var u = window.navigator.userAgent;
-      return {
-        userAgent: u,
-        trident: u.indexOf('Trident') > -1, //IE内核
-        presto: u.indexOf('Presto') > -1, //opera内核
-        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-        iPad: u.indexOf('iPad') > -1, //是否为iPad
-        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
-        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
-        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
-      };
-    }()
-  }
-  console.log("userAgent:" + browser.versions.userAgent);
 
-  // callback
-  function fontLoaded() {
-    console.log('font loaded');
-    if (document.getElementsByClassName('site-intro-meta')) {
-      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
-      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
-      var postIntros = document.getElementsByClassName('post-intros')[0]
-      if (postIntros) {
-        postIntros.classList.add('post-fade-in');
-      }
-    }
-  }
+<nav class="site-nav">
+  
 
-  // UC不支持跨域，所以直接显示
-  function asyncCb(){
-    if (browser.versions.uc) {
-      console.log("UCBrowser");
-      fontLoaded();
-    } else {
-      WebFont.load({
-        custom: {
-          families: ['Oswald-Regular']
-        },
-        loading: function () {  //所有字体开始加载
-          // console.log('loading');
-        },
-        active: function () {  //所有字体已渲染
-          fontLoaded();
-        },
-        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
-          console.log('inactive: timeout');
-          fontLoaded();
-        },
-        timeout: 5000 // Set the timeout to two seconds
-      });
-    }
-  }
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/dzh.github.io/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/dzh.github.io/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
 
-  function asyncErr(){
-    console.warn('script load from CDN failed, will load local script')
-  }
-
-  // load webfont-loader async, and add callback function
-  function async(u, cb, err) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
-    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
-
-  var asyncLoadWithFallBack = function(arr, success, reject) {
-      var currReject = function(){
-        reject()
-        arr.shift()
-        if(arr.length)
-          async(arr[0], success, currReject)
-        }
-
-      async(arr[0], success, currReject)
-  }
-
-  asyncLoadWithFallBack([
-    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
-    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
-    "/dzh.github.io/lib/webfontloader.min.js"
-  ], asyncCb, asyncErr)
-</script>        
-        <img class="loading" src="/dzh.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
-        <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/md&typora/" >
-            
-                <span>[Untitled Post]</span>
-        </a>
-        <div class="abstract-content">
-            md文档中插入图片和上传
-https://www.jianshu.com/p/47c61c924669
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/windows%E5%91%BD%E4%BB%A4%E8%A1%8C/" >
-            
-                <span>[Untitled Post]</span>
-        </a>
-        <div class="abstract-content">
-            windows命令行
-1、在某个文件夹下快速进入该命令的命令行在文件夹地址栏输入cmd即可快速进入;
-或者shift+右键选择进入powershell2、命令行切换盘符操作12D:\repository\md&gt;e:E:\&gt;
-
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/SSH%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/" >
-            
-                <span>SSH免密登陆设置</span>
-        </a>
-        <div class="abstract-content">
-            SSH免密登陆设置在Windows下查看**[c盘-&gt;用户-&gt;自己的用户名-&gt;.ssh]*下是否有“id_rsa、id_rsa.pub”*文件，如果没有需要从第一步开始手动生成,有的话直接跳到第二步。
-第1步：创建SSH Key打开Git Bash，在控制台中输入以下命令:
-1$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
-
-密钥类型可以用 -t 选项指定。如果没有指定则默认生成用于SSH-2的RSA密钥。这里使用的是rsa。 同时在密钥中有一个注释字段，用-C来指定所指定的注释，可以方便用户标识这个密钥...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "git">git</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" >
-            
-                <span>clang-format 使用手册</span>
-        </a>
-        <div class="abstract-content">
-            clang-format 使用手册背景介绍该程序能够自动化格式 C/C++/Obj-C 代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义 style（通过编写 .clang-format 文件）。
-安装ubuntu安装clang-format1sudo apt-get install clang-format
-
-手动安装clang-format
-下载 文件clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz
-1wget https://github.com/llvm/llvm-pr...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "vscode">vscode</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/git%20%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" >
-            
-                <span>git 命令总结</span>
-        </a>
-        <div class="abstract-content">
-            git 命令总结
-1、恢复文件如果不小心在本地删错了文件，但是版本库中还有，这时可以用 如下命令把误删的文件恢复到最新版本：
-12$ git checkout -- file 	#恢复删除的某个文件$ git checkout -- * 	#恢复删除的所有文件
-
-git checkout – file 其实是用版本库或者暂存区里的版本替换工作区的版本，无论工作区是修改还是删除都可以”一键还原“。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/linux/" >
-            
-                <span>linux 命令学习</span>
-        </a>
-        <div class="abstract-content">
-            固定ip配置修改配置文件文件所在目录：/etc/netplan/01-network-manager-all.yaml
-
-在Ubuntu17后采用该文件配置，是一种类似与xml的配置文件
-
-配置文件内容静态IP配置1234567891011# Let NetworkManager manage all devices on this systemnetwork:  version: 2  renderer: NetworkManager  ethernets:          eth0:                  dhcp4: false                  ad...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "linux">linux</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/12/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >
-            
-                <span>python学习笔记</span>
-        </a>
-        <div class="abstract-content">
-            python学习笔记
-[toc]
-注释1、多行注释123456789方式1：&#x27;&#x27;&#x27;多行注释内容&#x27;&#x27;&#x27;方式2&quot;&quot;&quot;多行注释内容&quot;&quot;&quot;
-
-2、特殊注释123Linux下起作用,放在文件行首的两个特殊注释#!/usr1/bin/python3          #指示python解释器的路径#--coding=utf-8--            #指定编码格式，python3之后默认utf-8可以不用写           
-
-变量1、变量类型
-12345678910111...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "python">python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/dzh.github.io/2021/07/11/hello-world/" >
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
-
-More info: Writing
-Run server1$ hexo ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    <!-- paginator  -->
-    
-</main>
-            <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /dzh.github.io/avatar/jihan.jpg >
-    <div class="profile-name">徵弘</div>
-    
-    <div class="profile-signature">
-        witness me
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:hw.d@qq.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                    
-                    <img class="profile-qr" src="/dzh.github.io/assets/example_qr.png" />
-                </span>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href= //www.baidu.com target="_black">friendA</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href= //www.google.com target="_black">friendB</a>
-                    </span>
-                
-            
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/dzh.github.io/about" >ABOUT ME</a>
-        </div>
-    
-</div>
-            
-        </div>
-        <footer class="footer footer-unloaded">
-    <!-- social  -->
-    
-    <div class="social">
-        
-    
-        
-            
-                <a href="mailto:hw.d@qq.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                    
-                    <img class="profile-qr" src="/dzh.github.io/assets/example_qr.png" />
-                </span>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-    </div>
-    
-    <!-- powered by Hexo  -->
-    <div class="copyright">
-        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
-    </div>
-    <!-- website approve for Chinese user -->
-    
-    <!-- 不蒜子  -->
-    
-    <div class="busuanzi-container">
-    
-     
-    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
-    
-    </div>
-    
-</footer>
-    </div>
-    <!-- toc -->
-    
-    <div class="sidebar sidebar-hide">
-    <ul class="sidebar-tabs sidebar-tabs-active-0">
-        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
-        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
-        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+      
     </ul>
-    <div class="sidebar-content sidebar-content-show-archive">
-          <div class="sidebar-panel-archives">
-    <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-and-search">
-        <div class="total-archive">
-        Total : 8
-        </div>
-        <!-- search  -->
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/md&typora/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/md&typora/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:46:46+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>md文档中插入图片和上传</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/47c61c924669">https://www.jianshu.com/p/47c61c924669</a></p>
+
+          
+        
+      
     </div>
     
-    <div class="post-archive">
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/windows%E5%91%BD%E4%BB%A4%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/windows%E5%91%BD%E4%BB%A4%E8%A1%8C/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:46:46+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
     
     
     
-    
-    <div class="archive-year"> 2021 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/SSH%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/" >SSH免密登陆设置</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" >clang-format 使用手册</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/git%20%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" >git 命令总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/linux/" >linux 命令学习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/11</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/11/hello-world/" >Hello World</a>
-        </li>
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>windows命令行</p>
+<h5 id="1、在某个文件夹下快速进入该命令的命令行"><a href="#1、在某个文件夹下快速进入该命令的命令行" class="headerlink" title="1、在某个文件夹下快速进入该命令的命令行"></a>1、在某个文件夹下快速进入该命令的命令行</h5><p>在文件夹地址栏输入cmd即可快速进入;</p>
+<h5 id="或者shift-右键选择进入powershell"><a href="#或者shift-右键选择进入powershell" class="headerlink" title="或者shift+右键选择进入powershell"></a>或者shift+右键选择进入powershell</h5><h5 id="2、命令行切换盘符操作"><a href="#2、命令行切换盘符操作" class="headerlink" title="2、命令行切换盘符操作"></a>2、命令行切换盘符操作</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\repository\md&gt;e:</span><br><span class="line">E:\&gt;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/SSH%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/SSH%E5%85%8D%E5%AF%86%E7%99%BB%E9%99%86%E8%AE%BE%E7%BD%AE/" itemprop="url">SSH免密登陆设置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:16:30+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
     
     
-        </ul>
     
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/md&typora/" >[Untitled Post]</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2021 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" >python学习笔记</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SSH免密登陆设置"><a href="#SSH免密登陆设置" class="headerlink" title="SSH免密登陆设置"></a>SSH免密登陆设置</h1><p>在Windows下查看**[c盘-&gt;用户-&gt;自己的用户名-&gt;.ssh]*<em>下是否有</em>“id_rsa、id_rsa.pub”*文件，如果没有需要从第一步开始手动生成,有的话直接跳到第二步。</p>
+<h2 id="第1步：创建SSH-Key"><a href="#第1步：创建SSH-Key" class="headerlink" title="第1步：创建SSH Key"></a>第1步：创建SSH Key</h2><p>打开<strong>Git Bash</strong>，在控制台中输入以下命令:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ssh-keygen -t rsa -C <span class="string">&quot;youremail@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>密钥类型可以用 -t 选项指定。如果没有指定则默认生成用于SSH-2的RSA密钥。这里使用的是rsa。<br> 同时在密钥中有一个注释字段，用-C来指定所指定的注释，可以方便用户标识这个密钥，指出密钥的用途或其他有用的信息。所以在这里输入自己的邮箱或者其他都行,当然，如果不想要这些可以直接输入：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ssh-keygen</span><br></pre></td></tr></table></figure>
+
+<p>我一般就是这么做的。</p>
+<p>输入完毕后按回车，程序会要求输入一个密码，输入完密码后按回车会要求再确认一次密码，如果不想要密码可以在要求输入密码的时候按两次回车，表示密码为空，并且确认密码为空，此时**[c盘&gt;用户&gt;自己的用户名&gt;.ssh]**目录下已经生成好了。</p>
+<h2 id="第2步：部署公钥"><a href="#第2步：部署公钥" class="headerlink" title="第2步：部署公钥"></a>第2步：部署公钥</h2><h5 id="版本管理仓库免密登陆"><a href="#版本管理仓库免密登陆" class="headerlink" title="版本管理仓库免密登陆"></a>版本管理仓库免密登陆</h5><p>不同的版本管理代码仓库都大同小异，这里以Github举例，登录Github。打开setting-&gt;SSH keys，点击右上角 New SSH key，把**[c盘-&gt;用户-&gt;自己的用户名-&gt;.ssh]*<em>目录下生成好的公钥</em>“id_rsa.pub”*文件以文本打开复制放进 key输入框中，再为当前的key起一个title来区分每个key。</p>
+<h5 id="其他Linux设备免密登陆"><a href="#其他Linux设备免密登陆" class="headerlink" title="其他Linux设备免密登陆"></a>其他Linux设备免密登陆</h5><p>实际上是将id_rsa.pub的内容放到authorized_keys文件内（没有的话就创建），注意要在对应的用户文件下放置，如下是在root用户的目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+
+
+          
+        
+      
+    </div>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/dzh.github.io/2021/07/12/windows%E5%91%BD%E4%BB%A4%E8%A1%8C/" >[Untitled Post]</a>
-        </li>
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/clang-format%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" itemprop="url">clang-format 使用手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:16:30+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="clang-format-使用手册"><a href="#clang-format-使用手册" class="headerlink" title="clang-format 使用手册"></a>clang-format 使用手册</h1><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>该程序能够自动化格式 C/C++/Obj-C 代码，支持多种代码风格：Google, Chromium, LLVM, Mozilla, WebKit，也支持自定义 style（通过编写 .clang-format 文件）。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="ubuntu安装clang-format"><a href="#ubuntu安装clang-format" class="headerlink" title="ubuntu安装clang-format"></a>ubuntu安装clang-format</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install clang-format</span><br></pre></td></tr></table></figure>
+
+<h3 id="手动安装clang-format"><a href="#手动安装clang-format" class="headerlink" title="手动安装clang-format"></a>手动安装clang-format</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz">下载</a> 文件clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz</span><br></pre></td></tr></table></figure></li>
+<li><p>解压文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf clang+llvm-11.0.0-x86_64-linux-sles12.4.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>解压目录如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── include</span><br><span class="line">├── lib</span><br><span class="line">├── libexec</span><br><span class="line">└── share</span><br></pre></td></tr></table></figure>
+
+<p>bin 文件中有 clang-format 的可执行文件</p>
+</li>
+<li><p>将clang-format放入 <code>/usr/bin</code>目录下完成安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv .clang-format /usr/bin</span><br></pre></td></tr></table></figure></li>
+<li><p>查看版本如下，安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@dzh-pc:/# clang-format-10 -version</span><br><span class="line">clang-format version 10.0.0-4ubuntu1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="vscode中使用clang-format"><a href="#vscode中使用clang-format" class="headerlink" title="vscode中使用clang-format"></a>vscode中使用clang-format</h2><h3 id="部署-clang-format文件"><a href="#部署-clang-format文件" class="headerlink" title="部署 .clang-format文件"></a>部署 <code>.clang-format</code>文件</h3><p>在工程根目录下新建 <code>.clang-format</code> 文件，填入规则，如下是基于google的格式进行修改的一个例子，仅供参考</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br></pre></td><td class="code"><pre><span class="line"># 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto</span><br><span class="line">Language: Cpp</span><br><span class="line"># BasedOnStyle:	LLVM</span><br><span class="line"></span><br><span class="line"># 访问说明符(public、private等)的偏移</span><br><span class="line">AccessModifierOffset: -4</span><br><span class="line"></span><br><span class="line"># 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)</span><br><span class="line">AlignAfterOpenBracket: Align</span><br><span class="line"></span><br><span class="line"># 连续赋值时，对齐所有等号</span><br><span class="line">AlignConsecutiveAssignments: false</span><br><span class="line"></span><br><span class="line"># 连续声明时，对齐所有声明的变量名</span><br><span class="line">AlignConsecutiveDeclarations: false</span><br><span class="line"></span><br><span class="line"># 右对齐逃脱换行(使用反斜杠换行)的反斜杠</span><br><span class="line">AlignEscapedNewlines: Right</span><br><span class="line"></span><br><span class="line"># 水平对齐二元和三元表达式的操作数</span><br><span class="line">AlignOperands: true</span><br><span class="line"></span><br><span class="line"># 对齐连续的尾随的注释</span><br><span class="line">AlignTrailingComments: true</span><br><span class="line"></span><br><span class="line"># 不允许函数声明的所有参数在放在下一行</span><br><span class="line">AllowAllParametersOfDeclarationOnNextLine: false</span><br><span class="line"></span><br><span class="line"># 不允许短的块放在同一行</span><br><span class="line">AllowShortBlocksOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 允许短的case标签放在同一行</span><br><span class="line">AllowShortCaseLabelsOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 允许短的函数放在同一行: None, InlineOnly(定义在类中), Empty(空函数), Inline(定义在类中，空函数), All</span><br><span class="line">AllowShortFunctionsOnASingleLine: None</span><br><span class="line"></span><br><span class="line"># 允许短的if语句保持在同一行</span><br><span class="line">AllowShortIfStatementsOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 允许短的循环保持在同一行</span><br><span class="line">AllowShortLoopsOnASingleLine: true</span><br><span class="line"></span><br><span class="line"># 总是在返回类型后换行: None, All, TopLevel(顶级函数，不包括在类中的函数), </span><br><span class="line"># AllDefinitions(所有的定义，不包括声明), TopLevelDefinitions(所有的顶级函数的定义)</span><br><span class="line">AlwaysBreakAfterReturnType: None</span><br><span class="line"></span><br><span class="line"># 总是在多行string字面量前换行</span><br><span class="line">AlwaysBreakBeforeMultilineStrings: false</span><br><span class="line"></span><br><span class="line"># 总是在template声明后换行</span><br><span class="line">AlwaysBreakTemplateDeclarations: true</span><br><span class="line"></span><br><span class="line"># false表示函数实参要么都在同一行，要么都各自一行。 false时看是否超出ColumnLimit的限制</span><br><span class="line">BinPackArguments: true</span><br><span class="line"></span><br><span class="line"># false表示所有形参要么都在同一行，要么都各自一行</span><br><span class="line">BinPackParameters: true</span><br><span class="line"></span><br><span class="line"># 大括号换行，只有当BreakBeforeBraces设置为Custom时才有效</span><br><span class="line">BraceWrapping:</span><br><span class="line">  # class定义后面</span><br><span class="line">  AfterClass: false</span><br><span class="line">  # 控制语句后面</span><br><span class="line">  AfterControlStatement: false</span><br><span class="line">  # enum定义后面</span><br><span class="line">  AfterEnum: false</span><br><span class="line">  # 函数定义后面</span><br><span class="line">  AfterFunction: false</span><br><span class="line">  # 命名空间定义后面</span><br><span class="line">  AfterNamespace: false</span><br><span class="line">  # struct定义后面</span><br><span class="line">  AfterStruct: false</span><br><span class="line">  # union定义后面</span><br><span class="line">  AfterUnion: false</span><br><span class="line">  # extern之后</span><br><span class="line">  AfterExternBlock: false</span><br><span class="line">  # catch之前</span><br><span class="line">  BeforeCatch: false</span><br><span class="line">  # else之前</span><br><span class="line">  BeforeElse: false</span><br><span class="line">  # 缩进大括号</span><br><span class="line">  IndentBraces: false</span><br><span class="line">  # 分离空函数</span><br><span class="line">  SplitEmptyFunction: false</span><br><span class="line">  # 分离空语句</span><br><span class="line">  SplitEmptyRecord: false</span><br><span class="line">  # 分离空命名空间</span><br><span class="line">  SplitEmptyNamespace: false</span><br><span class="line"></span><br><span class="line"># 在二元运算符前换行: None(在操作符后换行), NonAssignment(在非赋值的操作符前换行), All(在操作符前换行)</span><br><span class="line">BreakBeforeBinaryOperators: NonAssignment</span><br><span class="line"></span><br><span class="line"># 在大括号前换行: Attach(始终将大括号附加到周围的上下文), Linux(除函数、命名空间和类定义，与Attach类似), </span><br><span class="line">#   Mozilla(除枚举、函数、记录定义，与Attach类似), Stroustrup(除函数定义、catch、else，与Attach类似), </span><br><span class="line">#   Allman(总是在大括号前换行), GNU(总是在大括号前换行，并对于控制语句的大括号增加额外的缩进), WebKit(在函数前换行), Custom</span><br><span class="line">#   注：这里认为语句块也属于函数</span><br><span class="line">BreakBeforeBraces: Custom</span><br><span class="line"></span><br><span class="line"># 在三元运算符前换行</span><br><span class="line">BreakBeforeTernaryOperators: false</span><br><span class="line"></span><br><span class="line"># 在构造函数的初始化列表的冒号后换行</span><br><span class="line">BreakConstructorInitializers: AfterColon</span><br><span class="line"></span><br><span class="line">#BreakInheritanceList: AfterColon</span><br><span class="line"></span><br><span class="line">BreakStringLiterals: false</span><br><span class="line"></span><br><span class="line"># 每行字符的限制，0表示没有限制， </span><br><span class="line">ColumnLimit: 120</span><br><span class="line"></span><br><span class="line">CompactNamespaces: true</span><br><span class="line"></span><br><span class="line"># 构造函数的初始化列表要么都在同一行，要么都各自一行</span><br><span class="line">ConstructorInitializerAllOnOneLineOrOnePerLine: false</span><br><span class="line"></span><br><span class="line"># 构造函数的初始化列表的缩进宽度</span><br><span class="line">ConstructorInitializerIndentWidth: 4</span><br><span class="line"></span><br><span class="line"># 延续的行的缩进宽度</span><br><span class="line">ContinuationIndentWidth: 4</span><br><span class="line"></span><br><span class="line"># 去除C++11的列表初始化的大括号&#123;后和&#125;前的空格</span><br><span class="line">Cpp11BracedListStyle: true</span><br><span class="line"></span><br><span class="line"># 继承最常用的指针和引用的对齐方式</span><br><span class="line">DerivePointerAlignment: false</span><br><span class="line"></span><br><span class="line"># 固定命名空间注释</span><br><span class="line">FixNamespaceComments: true</span><br><span class="line"></span><br><span class="line"># 缩进case标签</span><br><span class="line">IndentCaseLabels: false</span><br><span class="line"></span><br><span class="line">IndentPPDirectives: None</span><br><span class="line"></span><br><span class="line"># 缩进宽度</span><br><span class="line">IndentWidth: 4</span><br><span class="line"></span><br><span class="line"># 函数返回类型换行时，缩进函数声明或函数定义的函数名</span><br><span class="line">IndentWrappedFunctionNames: false</span><br><span class="line"></span><br><span class="line"># 保留在块开始处的空行</span><br><span class="line">KeepEmptyLinesAtTheStartOfBlocks: false</span><br><span class="line"></span><br><span class="line"># 连续空行的最大数量</span><br><span class="line">MaxEmptyLinesToKeep: 1</span><br><span class="line"></span><br><span class="line"># 命名空间的缩进: None, Inner(缩进嵌套的命名空间中的内容), All</span><br><span class="line">NamespaceIndentation: None</span><br><span class="line"></span><br><span class="line"># 指针和引用的对齐: Left, Right, Middle</span><br><span class="line">PointerAlignment: Right</span><br><span class="line"></span><br><span class="line"># 允许重新排版注释</span><br><span class="line">ReflowComments: true</span><br><span class="line"></span><br><span class="line"># 允许排序#include</span><br><span class="line">SortIncludes: false</span><br><span class="line"></span><br><span class="line"># 允许排序 using 声明</span><br><span class="line">SortUsingDeclarations: false</span><br><span class="line"></span><br><span class="line"># 在C风格类型转换后添加空格</span><br><span class="line">SpaceAfterCStyleCast: false</span><br><span class="line"></span><br><span class="line"># 在Template 关键字后面添加空格</span><br><span class="line">SpaceAfterTemplateKeyword: true</span><br><span class="line"></span><br><span class="line"># 在赋值运算符之前添加空格</span><br><span class="line">SpaceBeforeAssignmentOperators: true</span><br><span class="line"></span><br><span class="line"># SpaceBeforeCpp11BracedList: true</span><br><span class="line"></span><br><span class="line"># SpaceBeforeCtorInitializerColon: true</span><br><span class="line"></span><br><span class="line"># SpaceBeforeInheritanceColon: true</span><br><span class="line"></span><br><span class="line"># 开圆括号之前添加一个空格: Never, ControlStatements, Always</span><br><span class="line">SpaceBeforeParens: ControlStatements</span><br><span class="line"></span><br><span class="line"># SpaceBeforeRangeBasedForLoopColon: true</span><br><span class="line"></span><br><span class="line"># 在空的圆括号中添加空格</span><br><span class="line">SpaceInEmptyParentheses: false</span><br><span class="line"></span><br><span class="line"># 在尾随的评论前添加的空格数(只适用于//)</span><br><span class="line">SpacesBeforeTrailingComments: 1</span><br><span class="line"></span><br><span class="line"># 在尖括号的&lt;后和&gt;前添加空格</span><br><span class="line">SpacesInAngles: false</span><br><span class="line"></span><br><span class="line"># 在C风格类型转换的括号中添加空格</span><br><span class="line">SpacesInCStyleCastParentheses: false</span><br><span class="line"></span><br><span class="line"># 在容器(ObjC和JavaScript的数组和字典等)字面量中添加空格</span><br><span class="line">SpacesInContainerLiterals: true</span><br><span class="line"></span><br><span class="line"># 在圆括号的(后和)前添加空格</span><br><span class="line">SpacesInParentheses: false</span><br><span class="line"></span><br><span class="line"># 在方括号的[后和]前添加空格，lamda表达式和未指明大小的数组的声明不受影响</span><br><span class="line">SpacesInSquareBrackets: false</span><br><span class="line"></span><br><span class="line"># 标准: Cpp03, Cpp11, Auto</span><br><span class="line">Standard: Cpp11</span><br><span class="line"></span><br><span class="line"># tab宽度</span><br><span class="line">TabWidth: 4</span><br><span class="line"></span><br><span class="line"># 使用tab字符: Never, ForIndentation, ForContinuationAndIndentation, Always</span><br><span class="line">UseTab: Never</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启自动格式化"><a href="#开启自动格式化" class="headerlink" title="开启自动格式化"></a>开启自动格式化</h3><p>在vscode配置文件目录中添加文件settings.json，保存文档时会触发自动格式化。内容填写如下（该设置仅针对该工程）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	    &quot;editor.formatOnSave&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者在设置中搜索 <code>format on save</code>，勾选对应选项即可（该设置针对全局）</p>
+<h3 id="指定clang-format位置"><a href="#指定clang-format位置" class="headerlink" title="指定clang-format位置"></a>指定clang-format位置</h3><p>在settings中添加如下内容,填入clang-format的绝对路径，没有进行如下配置，clang-format</p>
+<p>插件会尝试在PATH中查找：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;clang-format.executable&quot;: &quot;/usr/bin/clang-format&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>This extension will attempt to find clang-format on your <code>PATH</code>. Alternatively, the clang-format executable can be specified in your vscode settings.json file:</p>
+</blockquote>
+<p>或者在vscode的设置中搜索 <code>clang-format.executable</code> ，显式指定clang-format的绝对路径即可。</p>
+<h3 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h3><ul>
+<li>手动：在代码中右键点击 <code>Format Document</code> 或者使用快捷键 <code>ctrl + shift + f</code> </li>
+</ul>
+<ul>
+<li>自动： <code>ctrl + s</code> 保存文档，触发自动格式化（前提是要开启自动化选，上文有提到开启方法）</li>
+</ul>
+<ul>
+<li><p>批量格式化：find ./dirname  -iname “*.h” -o -iname “*.c” | xargs clang-format -style=file -i</p>
+<blockquote>
+<p>对文件夹下的文件一起进行格式化</p>
+<p>./dirname 为文件夹目录</p>
+<p>-iname 指按名字匹配文件，且不区分大小写</p>
+<p>-o 同 -or，表示or的意思，这里指查找”*.h” 和”*.c”的文件。类似的还有 -a (meaning logical AND).</p>
+<p>xargs 是一个强有力的命令，它能够捕获一个命令的输出，然后传递给另外一个命令；xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行；xargs 默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="https://releases.llvm.org/download.html">https://releases.llvm.org/download.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=xaver.clang-format">clang-format 插件使用说明</a></p>
+<p><a target="_blank" rel="noopener" href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html">https://clang.llvm.org/docs/ClangFormatStyleOptions.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html">find命令介绍</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/git%20%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/git%20%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" itemprop="url">git 命令总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:16:30+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>git 命令总结</p>
+<h5 id="1、恢复文件"><a href="#1、恢复文件" class="headerlink" title="1、恢复文件"></a>1、<strong>恢复文件</strong></h5><p>如果不小心在本地删错了文件，但是版本库中还有，这时可以用 如下命令把误删的文件恢复到最新版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- file 	#恢复删除的某个文件</span><br><span class="line">$ git checkout -- * 	#恢复删除的所有文件</span><br></pre></td></tr></table></figure>
+
+<p>git checkout – file 其实是用版本库或者暂存区里的版本替换工作区的版本，无论工作区是修改还是删除都可以”一键还原“。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/linux/" itemprop="url">linux 命令学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:16:30+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="固定ip配置"><a href="#固定ip配置" class="headerlink" title="固定ip配置"></a>固定ip配置</h2><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="文件所在目录："><a href="#文件所在目录：" class="headerlink" title="文件所在目录："></a>文件所在目录：</h3><p>/etc/netplan/01-network-manager-all.yaml</p>
+<blockquote>
+<p>在Ubuntu17后采用该文件配置，是一种类似与xml的配置文件</p>
+</blockquote>
+<h3 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h3><h4 id="静态IP配置"><a href="#静态IP配置" class="headerlink" title="静态IP配置"></a>静态IP配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Let NetworkManager manage all devices on this system</span><br><span class="line">network:</span><br><span class="line">  version: 2</span><br><span class="line">  renderer: NetworkManager</span><br><span class="line">  ethernets:</span><br><span class="line">          eth0:</span><br><span class="line">                  dhcp4: false</span><br><span class="line">                  addresses: [192.168.1.4/24]</span><br><span class="line">                  gateway4: 192.168.1.1</span><br><span class="line">                  nameservers:</span><br><span class="line">                         addresses: [8.8.8.8, 114.114.114.114]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>dhcp4: 其中的4表示针对ipv4，其他类似</p>
+<p>addresses：可以有多个，逗号隔开即可</p>
+<p>eth0：网卡名称，通过<code>ip addr</code> 命令可以查到</p>
+<p>ethernets：网卡信息，其中可以并列配置多张网卡</p>
+<p>注意各个字段和内容冒号后要空格</p>
+</blockquote>
+<h4 id="动态IP配置"><a href="#动态IP配置" class="headerlink" title="动态IP配置"></a>动态IP配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Let NetworkManager manage all devices on this system</span><br><span class="line">network:</span><br><span class="line">  version: 2</span><br><span class="line">  renderer: NetworkManager</span><br><span class="line">  ethernets:</span><br><span class="line">          eth0:</span><br><span class="line">                  dhcp4: true</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置多个网卡"><a href="#配置多个网卡" class="headerlink" title="配置多个网卡"></a>配置多个网卡</h4><p>如果虚拟机创建了又一个网卡，但是没有对应的ip配置，可通过如下方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/netplan/02-network-manager-all.yaml</span><br><span class="line">sudo netplan apply</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建一个新的网卡配置文件02-network-manager-all.yaml，并将配如下的信息写入，刷新网卡，既可以看到配置的固定ip</p>
+</blockquote>
+<p>network:<br>  version: 2<br>  renderer: NetworkManager<br>  ethernets:<br>          eth0:<br>                  dhcp4: false<br>                  addresses: [192.168.1.4/24]<br>                  gateway4: 192.168.1.1<br>                  nameservers:<br>                         addresses: [8.8.8.8, 114.114.114.114]</p>
+<h2 id="配置生效"><a href="#配置生效" class="headerlink" title="配置生效"></a>配置生效</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo netplan apply</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>即时生效，无序重启，生效后可以通过<code>ip addr</code>命令查看到网卡的ip</p>
+</blockquote>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo netplan --debug apply</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>增加–debug可以看到执行过程，遇到问题方便定位</p>
+</blockquote>
+<h1 id="linux-命令学习笔记"><a href="#linux-命令学习笔记" class="headerlink" title="linux 命令学习笔记"></a>linux 命令学习笔记</h1><h2 id="如何学习使用命令"><a href="#如何学习使用命令" class="headerlink" title="如何学习使用命令"></a>如何学习使用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">duanzhenghong@duanzhenghong-pc:~$ uname --help</span><br><span class="line">用法：uname [选项]...</span><br><span class="line">输出一组系统信息。如果不跟随选项，则视为只附加 -s 选项。</span><br><span class="line"></span><br><span class="line">  -a, --all                以如下次序输出所有信息。其中若 -p 和</span><br><span class="line">                             -i 的探测结果不可知则被省略：</span><br><span class="line">  -s, --kernel-name        输出内核名称</span><br><span class="line">  -n, --nodename           输出网络节点上的主机名</span><br><span class="line">  -r, --kernel-release     输出内核发行号</span><br><span class="line">  -v, --kernel-version     输出内核版本</span><br><span class="line">  -m, --machine            输出主机的硬件架构名称</span><br><span class="line">  -p, --processor          输出处理器类型（不可移植）</span><br><span class="line">  -i, --hardware-platform  输出硬件平台或（不可移植）</span><br><span class="line">  -o, --operating-system   输出操作系统名称</span><br><span class="line">      --help            显示此帮助信息并退出</span><br><span class="line">      --version         显示版本信息并退出</span><br><span class="line"></span><br><span class="line">GNU coreutils 在线帮助：&lt;https://www.gnu.org/software/coreutils/&gt;</span><br><span class="line">请向 &lt;http://translationproject.org/team/zh_CN.html&gt; 报告 uname 的翻译错误</span><br><span class="line">完整文档请见：&lt;https://www.gnu.org/software/coreutils/uname&gt;</span><br><span class="line">或者在本地使用：info &#x27;(coreutils) uname invocation&#x27;</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ info uname</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ man uname</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以 <code>uname</code> 为例子,如上展示了三种查看帮助和手册的方法, man 命令实际是manual的缩写</p>
+</blockquote>
+<h2 id="命令按功能分类"><a href="#命令按功能分类" class="headerlink" title="命令按功能分类"></a>命令按功能分类</h2><h3 id="查看系统的一些基本信息"><a href="#查看系统的一些基本信息" class="headerlink" title="查看系统的一些基本信息"></a>查看系统的一些基本信息</h3><h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">duanzhenghong@duanzhenghong-pc:~$ cat /etc/issue</span><br><span class="line">Ubuntu 20.04.2 LTS \n \l</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ cat /etc/os-release</span><br><span class="line">NAME=&quot;Ubuntu&quot;</span><br><span class="line">VERSION=&quot;20.04.2 LTS (Focal Fossa)&quot;</span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">PRETTY_NAME=&quot;Ubuntu 20.04.2 LTS&quot;</span><br><span class="line">VERSION_ID=&quot;20.04&quot;</span><br><span class="line">HOME_URL=&quot;https://www.ubuntu.com/&quot;</span><br><span class="line">SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;</span><br><span class="line">BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;</span><br><span class="line">PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span><br><span class="line">VERSION_CODENAME=focal</span><br><span class="line">UBUNTU_CODENAME=focal</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Ubuntu</span><br><span class="line">Description:    Ubuntu 20.04.2 LTS</span><br><span class="line">Release:        20.04</span><br><span class="line">Codename:       focal</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>LSB（linux标准库linux standard base）</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">duanzhenghong@duanzhenghong-pc:~$ uname</span><br><span class="line">Linux</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ uname -a</span><br><span class="line">Linux duanzhenghong-pc 5.8.0-50-generic #56~20.04.1-Ubuntu SMP Mon Apr 12 21:46:35 UTC 2021 x86_64 x86_64 x86                      _64 GNU/Linux</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ uname -v</span><br><span class="line"><span class="meta">#</span><span class="bash">56~20.04.1-Ubuntu SMP Mon Apr 12 21:46:35 UTC 2021</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><p>ps -ef</p>
+<blockquote>
+<p>常配合管道命令 | 和查找命令 grep 同时执行来查看特定进程。</p>
+<p>参数含义:</p>
+<p>-e 显示所有进程。-f 全格式。-h 不显示标题。-l 长格式。-w 宽输出。a 显示终端上的所有进程，包括其他用户的进程。r 只显示正在运行的进程。x 显示没有控制终端的进程。</p>
+</blockquote>
+<p>top</p>
+<blockquote>
+<p>实时显示进程信息</p>
+</blockquote>
+<p>htop</p>
+<blockquote>
+<p>htop是top的增强版,显示色彩,在命令行可以交互控制进程</p>
+</blockquote>
+<p>建立软连接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root@dzh-pc:/usr/bin# ll | grep python</span><br><span class="line">lrwxrwxrwx  1 root root          23 5月  27 21:30 pdb3.8 -&gt; ../lib/python3.8/pdb.py*</span><br><span class="line">lrwxrwxrwx  1 root root          31 3月   9 23:25 py3versions -&gt; ../share/python3/py3versions.py*</span><br><span class="line">lrwxrwxrwx  1 root root           9 3月   9 23:25 python3 -&gt; python3.8*</span><br><span class="line">-rwxr-xr-x  1 root root     5482296 5月  27 21:30 python3.8*</span><br><span class="line">root@dzh-pc:/usr/bin# ln -s python3.8 python</span><br><span class="line">root@dzh-pc:/usr/bin# ll | grep python</span><br><span class="line">lrwxrwxrwx  1 root root          23 5月  27 21:30 pdb3.8 -&gt; ../lib/python3.8/pdb.py*</span><br><span class="line">lrwxrwxrwx  1 root root          31 3月   9 23:25 py3versions -&gt; ../share/python3/py3versions.py*</span><br><span class="line">lrwxrwxrwx  1 root root           9 6月   3 23:12 python -&gt; python3.8*</span><br><span class="line">lrwxrwxrwx  1 root root           9 3月   9 23:25 python3 -&gt; python3.8*</span><br><span class="line">-rwxr-xr-x  1 root root     5482296 5月  27 21:30 python3.8*</span><br><span class="line">root@dzh-pc:/usr/bin# python</span><br><span class="line">Python 3.8.5 (default, May 27 2021, 13:30:53)</span><br><span class="line">[GCC 9.3.0] on linux</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过建立软连接python -&gt; python3.8，可以直接使用python来调用python3.8</p>
+</blockquote>
+<h4 id="计算机名"><a href="#计算机名" class="headerlink" title="计算机名"></a>计算机名</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">duanzhenghong@duanzhenghong-pc:~$ cat /etc/hostname</span><br><span class="line">duanzhenghong-pc</span><br><span class="line">duanzhenghong@duanzhenghong-pc:~$ hostname</span><br><span class="line">duanzhenghong-pc</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>hostname在linux和dos都可以使用</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改hostname文件中的名字并重启就可以改变计算机的名字</p>
+</blockquote>
+<h4 id="配置固定ip的思路-hyper-v虚拟机"><a href="#配置固定ip的思路-hyper-v虚拟机" class="headerlink" title="配置固定ip的思路(hyper-v虚拟机)"></a>配置固定ip的思路(hyper-v虚拟机)</h4><ul>
+<li><p>虚拟机配置dhcp,使用默认的虚拟交换机(自动配饰nat内网穿透功能),同时在windows主机下,将外网共享给默认的虚拟交换机,配置后可以访问外网.</p>
+</li>
+<li><p>创建一个内部交换机(假设名为fixIP),指定为内部网络,其他默认,然后再对应的虚拟机设置上增加(注意是增加,默认的交换机仍在)一个网络适配器,指定使用fixIP虚拟交换机.然后启动虚拟机,虚拟机中会增加一个网卡,修改该网卡对应的配置文件,配置为static,配置一个固定ip,同时在主机环境中将fixIP指定一个ip(与虚拟机设置的固定ip同网段)</p>
+</li>
+<li><p>虚拟机的代理功能配置</p>
+<p>全局变量增加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=http://username:password@proxyhk.huawei.com:8080</span><br><span class="line"></span><br><span class="line">export https_proxy=http://username:password@proxyhk.huawei.com:8080</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意密码中包含的特殊字符需要转换成url编码格式</p>
+</blockquote>
+</li>
+<li><p>git代理设置</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/290152303598">https://www.jianshu.com/p/290152303598</a></p>
+</li>
+</ul>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ctrl + r</td>
+<td>可以快速匹配历史命令,在历史命令中查找</td>
+</tr>
+<tr>
+<td>ctrl + u</td>
+<td>清除当前命令行的内容(光标之前的)</td>
+</tr>
+<tr>
+<td>ctrl + l</td>
+<td>清屏</td>
+</tr>
+<tr>
+<td>ctrl + t</td>
+<td>命令行最后两字符交换位置</td>
+</tr>
+</tbody></table>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><h4 id="反选删除文件"><a href="#反选删除文件" class="headerlink" title="反选删除文件"></a>反选删除文件</h4><p><code>rm -rf </code> !(file1 | file2)</p>
+<blockquote>
+<p>-r 表示遇到文件夹递归删除, -f表示强制删除, 命令表示表示删除当前目录下除了file1 和file2的所有文件</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/12/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/12/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">python学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-12T01:16:30+08:00">
+                2021-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>python学习笔记</p>
+<p>[toc]</p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><h5 id="1、多行注释"><a href="#1、多行注释" class="headerlink" title="1、多行注释"></a>1、多行注释</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">方式1：</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line">多行注释内容</span><br><span class="line">&#x27;&#x27;&#x27;</span><br><span class="line"></span><br><span class="line">方式2</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">多行注释内容</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、特殊注释"><a href="#2、特殊注释" class="headerlink" title="2、特殊注释"></a>2、特殊注释</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Linux下起作用,放在文件行首的两个特殊注释</span><br><span class="line">#!/usr1/bin/python3          #指示python解释器的路径</span><br><span class="line">#--coding=utf-8--            #指定编码格式，python3之后默认utf-8可以不用写           </span><br></pre></td></tr></table></figure>
+
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>1、变量类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[python基本数据类型]--&gt; B[数字 num]</span><br><span class="line">A[python基本数据类型]--&gt; C[字符串 str]</span><br><span class="line">A[python基本数据类型]--&gt; D[&quot;字典 dict &#123;&#125;&quot;] </span><br><span class="line">A[python基本数据类型]--&gt; E[&quot;元组 tuple ()&quot;]</span><br><span class="line">A[python基本数据类型]--&gt; F[&quot;列表 list []&quot;]</span><br><span class="line">A[python基本数据类型]--&gt; N[&quot;集合 set &#123;&#125;&quot;]</span><br><span class="line">B[数字 num]--&gt; G[有符号整型 int]</span><br><span class="line">B[数字 num]--&gt; H[长整型 long #python3取消]</span><br><span class="line">B[数字 num]--&gt; I[浮点型 float]</span><br><span class="line">B[数字 num]--&gt; J[复数 conplex]</span><br><span class="line">B[数字 num]--&gt; K[布尔值 bool]</span><br><span class="line">K[布尔值 bool]--&gt; L[true]</span><br><span class="line">K[布尔值 bool]--&gt; M[false]</span><br></pre></td></tr></table></figure>
+
+<p>集合与字典不同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jihe = &#123;1,2,3,4,5&#125;</span><br><span class="line">#与字典看上去类似，但是是不一样的。字典是 dict1 = &#123;key:value,key2:value2,&#125;需要key</span><br></pre></td></tr></table></figure>
+
+<p>（1）集合自动去重</p>
+<p>（2）集合打印内容无序， 因为无序，所以不支持切片和索引</p>
+<p>集合方法：<a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-set.html#setmethod">https://www.runoob.com/python3/python3-set.html#setmethod</a></p>
+<p>2、查看变量类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type(变量名)</span><br><span class="line">isinstance(变量名, 类型名) #isinstance() 函数来判断一个对象是否是一个已知的类型，类似 type()。</span><br></pre></td></tr></table></figure>
+
+<p>3、变量命名 （不能使用关键字）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import keyword</span><br><span class="line">&gt;&gt;&gt; keyword.kwlist</span><br><span class="line">[&#x27;False&#x27;, &#x27;None&#x27;, &#x27;True&#x27;, &#x27;and&#x27;, &#x27;as&#x27;, &#x27;assert&#x27;, &#x27;async&#x27;, &#x27;await&#x27;, &#x27;break&#x27;, &#x27;class&#x27;, &#x27;continue&#x27;, &#x27;def&#x27;, &#x27;del&#x27;, &#x27;elif&#x27;, &#x27;else&#x27;, &#x27;except&#x27;, &#x27;finally&#x27;, &#x27;for&#x27;, &#x27;from&#x27;, &#x27;global&#x27;, &#x27;if&#x27;, &#x27;import&#x27;, &#x27;in&#x27;, &#x27;is&#x27;, &#x27;lambda&#x27;, &#x27;nonlocal&#x27;, &#x27;not&#x27;, &#x27;or&#x27;, &#x27;pass&#x27;, &#x27;raise&#x27;, &#x27;return&#x27;, &#x27;try&#x27;, &#x27;while&#x27;, &#x27;with&#x27;, &#x27;yield&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>4、变量赋值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a,b,c,d = 11,34,654,6 #多个变量可以同时赋值</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><p>可变数据类型与不可变数据类型</p>
+<p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/operationhome/p/9642460.html">https://www.cnblogs.com/operationhome/p/9642460.html</a></p>
+<table>
+<thead>
+<tr>
+<th><strong>数据类型</strong></th>
+<th><strong>可变/不可变</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>整型</td>
+<td>不可变</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>不可变</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>不可变</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>可变</td>
+</tr>
+<tr>
+<td>集合</td>
+<td>可变</td>
+</tr>
+<tr>
+<td>字典</td>
+<td>可变</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p>1、算数运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#指数运算**</span><br><span class="line"># #相除取整</span><br><span class="line"># /相除</span><br><span class="line">&gt;&gt;&gt; a=2</span><br><span class="line">&gt;&gt;&gt; b=3</span><br><span class="line">&gt;&gt;&gt; a#b</span><br><span class="line">0</span><br><span class="line">&gt;&gt;&gt; a**b</span><br><span class="line">8</span><br><span class="line">&gt;&gt;&gt; a/b</span><br><span class="line">0.6666666666666666</span><br></pre></td></tr></table></figure>
+
+<p>2、比较运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#下面6个运算符与c语言相同</span><br><span class="line">== != &lt; &gt; &lt;= &gt;=</span><br></pre></td></tr></table></figure>
+
+<p>3、逻辑运算符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">and or not</span><br><span class="line"># 优先级比较 () -&gt; not -&gt; and -&gt; or</span><br></pre></td></tr></table></figure>
+
+<p> 4、赋值运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># **=</span><br><span class="line"># #=</span><br></pre></td></tr></table></figure>
+
+<h4 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h4><p>1、格式化输出，占位符%, print自带换行 ，可以通过end参数指定行尾符号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(&#x27;我的名字是%s：来自【%s】&#x27; % (name, class))</span><br><span class="line">print(f&quot;&#123;name&#125;&quot;, end=&quot;!&quot;) #叹号结尾</span><br></pre></td></tr></table></figure>
+
+<p>2、常用格式化符号</p>
+<p>format可以实现非常灵活的格式化输出</p>
+<p>参考：[python基础_格式化输出（%用法和format用法）](https:#w ww.cnblogs.com/qinchao0317/p/10699717.html)</p>
+<p>3、输入 input()</p>
+<p>注意，输入的都是str类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = input(&#x27;please input your name：&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="流程语句"><a href="#流程语句" class="headerlink" title="流程语句"></a>流程语句</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[流程语句]--&gt;B[顺序] &amp; C[选择] &amp; D[循环]</span><br></pre></td></tr></table></figure>
+
+<p>1、条件语句</p>
+<ul>
+<li>elif相当于C语言中的else if</li>
+<li>条件表达式：比较运算符、逻辑运算符、复合运算符</li>
+<li>跳出if到下个分支处理的方法：1、下一行定格写 2、使用pass空语句，表示该代码块结束</li>
+</ul>
+<h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><p>1、两种循环</p>
+<ul>
+<li><p>while主要用在不确定循环次数的场景<br>while 条件表达式：</p>
+<p>​        循环体</p>
+</li>
+<li><p>for主要用于遍历<br>for … in 可迭代的对象(字符串，列表等)</p>
+<p>​        循环体</p>
+</li>
+</ul>
+<p>2、for循环中用到的list与range</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#range用法，python3中range返回的可迭代对象（类型是对象），而不是列表，range与list切片访问明确的边界都是左闭右开</span><br><span class="line">range(start, stop[, step])</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; type(range(1,2,1))</span><br><span class="line">&lt;class &#x27;range&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3、for…else… 与 while…else..</p>
+<p>有时我们需要判断程序是正常退出循环（遍历完成），还是中途退出，据此来进行下面的不同操作。可能会加一个判断，比如下面的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = [1, 2, 3, 4]</span><br><span class="line">flag = True</span><br><span class="line">for i in range(len(a)):</span><br><span class="line">	if a[i] == 2:</span><br><span class="line">		flag = False</span><br><span class="line">		break</span><br><span class="line">if flag:</span><br><span class="line">	print(&#x27;yes&#x27;)</span><br><span class="line">else:</span><br><span class="line">	print(&#x27;no&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+<p>用for … else 可以简化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [1, 2, 3, 4]</span><br><span class="line">for i in range(len(a)):</span><br><span class="line">	if a[i] == 2:</span><br><span class="line">		break</span><br><span class="line">else:</span><br><span class="line">	print(&#x27;yes&#x27;)</span><br><span class="line">print(&#x27;no&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>正常退出循环会执行else，使用break提前退出会跳过else</p>
+<ol start="4">
+<li>iterable可迭代</li>
+</ol>
+<p>简单说就是可以进行<code>for</code>循环的。<br>字符串、list类型、字典类型、元组类型，包括自定义的类都是可以迭代。</p>
+<h2 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h2><ol>
+<li>总览</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">x[序列]--&gt;a[序列类型] &amp; e[序列操作]</span><br><span class="line">a[序列类型]--&gt;b[列表 list] &amp; c[字符串 str] &amp; d[元组]</span><br><span class="line">e[序列操作]--&gt;f[索引] &amp; g[切片] &amp; h[加 乘] &amp; i[计算序列长] &amp; j[求序列极值] &amp; m[检查元素是否包含在序列中] &amp; k[其他序列内置函数]</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li> 序列的切片操作（以list为例）</li>
+</ol>
+<ul>
+<li>可以使用索引访问列表内容。序列中的索引编号，都是从0开始递增</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">numbers=[1,2,3,4,5,6]</span><br><span class="line">numbers[0]        	#输出1</span><br><span class="line">numbers[-1]			#输出6</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用切片进行访问</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">numbers=[1,2,3,4,5,6,7,8,9,10]</span><br><span class="line">numbers[:]				#[1,2,3,4,5,6,7,8,9,10]取整个列表</span><br><span class="line">numbers[1:4]            #[2,3,4]</span><br><span class="line">numbers[0:1]            #[1]</span><br><span class="line">numbers[7:10]           #[8,9,10]</span><br><span class="line">numbers[7:]             #[8,9,10]</span><br><span class="line">numbers[:3]             #[1,2,3]</span><br><span class="line">numbers[-3:]            #[8,9,10]</span><br><span class="line">numbers[-3:-1]          #[8,9] 没有倒数第0，表示从倒数第三个到倒数第一个</span><br></pre></td></tr></table></figure>
+
+<p>切片提供了两个索引来指定切片大的边界，第一个索引指定开始位置（包含在切片内），第二个索引指定的结束的位置，不包含在切片内。如果索引是负数，是从切片末尾进行，负数的索引不能获取列表中最后一个元素。比如numbers[-2:-1]这是倒数第二个元素，numbers[-1:0]这是一个空列表。</p>
+<ul>
+<li><p>使用切片，指定步长，默认是1</p>
+<p><code>[start：end：step]</code></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">numbers=[1,2,3,4,5,6,7,8,9,10]</span><br><span class="line">numbers[::1]            #[1,2,3,4,5,6,7,8,9,10]</span><br><span class="line">numbers[2::2]           #[3,5,7,9]</span><br><span class="line">numbers[2::-1]          #[3,2,1]</span><br></pre></td></tr></table></figure>
+
+<p>第三个参数用于指定步长，如果是负数，即从右向左提取元素。numbers[2:4:-1] 是[]，步长是负数，从索引2的位置开始，向左到索引位置为4的位置，显然不存在，结果为[]。numbers[4:2:-1]，从索引位置4开始，向左到索引位置为2的地方，第一个索引包含在列表中，结果[5,4]。</p>
+<ul>
+<li>可以使用切片方式，实现序列反转,字符串反转。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str=&quot;nihao&quot;</span><br><span class="line">str[::-1]        #&#x27;oahin&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>序列加乘</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str=&quot;c.biancheng.net&quot;</span><br><span class="line">print(&quot;C语言&quot;+&quot;中文网:&quot;+str)  #C语言中文网：c.biancheng.net</span><br><span class="line">str=&quot;C语言中文网&quot;</span><br><span class="line">print(str*3)				#C语言中文网C语言中文网C语言中文网</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>检查元素是否包含在序列中</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str=&quot;c.biancheng.net&quot;</span><br><span class="line">print(&#x27;c&#x27;in str) 		#True</span><br><span class="line">print(&#x27;c&#x27; not in str)	#False</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>内置函数</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>len()</td>
+<td>计算序列的长度，即返回序列中包含多少个元素。</td>
+</tr>
+<tr>
+<td>max()</td>
+<td>找出序列中的最大元素。注意，对序列使用 sum() 函数时，做加和操作的必须都是数字，不能是字符或字符串，否则该函数将抛出异常，因为解释器无法判定是要做连接操作（+ 运算符可以连接两个序列），还是做加和操作。</td>
+</tr>
+<tr>
+<td>min()</td>
+<td>找出序列中的最小元素。</td>
+</tr>
+<tr>
+<td>list()</td>
+<td>将序列转换为列表。</td>
+</tr>
+<tr>
+<td>str()</td>
+<td>将序列转换为字符串。</td>
+</tr>
+<tr>
+<td>sum()</td>
+<td>计算元素和。</td>
+</tr>
+<tr>
+<td>sorted()</td>
+<td>对元素进行排序。</td>
+</tr>
+<tr>
+<td>reversed()</td>
+<td>反向序列中的元素。</td>
+</tr>
+<tr>
+<td>enumerate()</td>
+<td>将序列组合为一个索引序列，多用在 for 循环中。</td>
+</tr>
+</tbody></table>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ol>
+<li><p>python转义字符（不熟悉的）</p>
+<table>
+<thead>
+<tr>
+<th align="left">转义字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">\(在行尾时)</td>
+<td align="left">续行符</td>
+</tr>
+<tr>
+<td align="left">\oyy</td>
+<td align="left">八进制数，y 代表 0~7 的字符，例如：\012 代表换行。</td>
+</tr>
+<tr>
+<td align="left">\xyy</td>
+<td align="left">十六进制数，以 \x 开头，yy代表的字符，例如：\x0a代表换行</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>字符串运算符</p>
+<p>下表实例变量 a 值为字符串 “Hello”，b 变量值为 “Python”：</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+</td>
+<td align="left">字符串连接</td>
+<td align="left">&gt;&gt;&gt;a + b ‘HelloPython’</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">重复输出字符串</td>
+<td align="left">&gt;&gt;&gt;a * 2 ‘HelloHello’</td>
+</tr>
+<tr>
+<td align="left">[]</td>
+<td align="left">通过索引获取字符串中字符</td>
+<td align="left">&gt;&gt;&gt;a[1] ‘e’</td>
+</tr>
+<tr>
+<td align="left">[ : ]</td>
+<td align="left">截取字符串中的一部分</td>
+<td align="left">&gt;&gt;&gt;a[1:4] ‘ell’</td>
+</tr>
+<tr>
+<td align="left">in</td>
+<td align="left">成员运算符 - 如果字符串中包含给定的字符返回 True</td>
+<td align="left">&gt;&gt;&gt;”H” in a True</td>
+</tr>
+<tr>
+<td align="left">not in</td>
+<td align="left">成员运算符 - 如果字符串中不包含给定的字符返回 True</td>
+<td align="left">&gt;&gt;&gt;”M” not in a True</td>
+</tr>
+<tr>
+<td align="left">r/R</td>
+<td align="left">原始字符串 - 原始字符串：所有的字符串都是直接按照字面的意思来使用，没有转义特殊或不能打印的字符。 原始字符串除在字符串的第一个引号前加上字母”r”（可以大小写）以外，与普通字符串有着几乎完全相同的语法。</td>
+<td align="left">&gt;&gt;&gt;print r’\n’ \n &gt;&gt;&gt; print R’\n’ \n</td>
+</tr>
+<tr>
+<td align="left">%</td>
+<td align="left">格式字符串</td>
+<td align="left">请看下一章节</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>python 字符串格式化符号:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">符  号</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">%c</td>
+<td align="left">格式化字符及其ASCII码</td>
+</tr>
+<tr>
+<td align="left">%s</td>
+<td align="left">格式化字符串</td>
+</tr>
+<tr>
+<td align="left">%d</td>
+<td align="left">格式化整数</td>
+</tr>
+<tr>
+<td align="left">%u</td>
+<td align="left">格式化无符号整型</td>
+</tr>
+<tr>
+<td align="left">%o</td>
+<td align="left">格式化无符号八进制数</td>
+</tr>
+<tr>
+<td align="left">%x</td>
+<td align="left">格式化无符号十六进制数</td>
+</tr>
+<tr>
+<td align="left">%X</td>
+<td align="left">格式化无符号十六进制数（大写）</td>
+</tr>
+<tr>
+<td align="left">%f</td>
+<td align="left">格式化浮点数字，可指定小数点后的精度</td>
+</tr>
+<tr>
+<td align="left">%e</td>
+<td align="left">用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td align="left">%E</td>
+<td align="left">作用同%e，用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td align="left">%g</td>
+<td align="left">%f和%e的简写</td>
+</tr>
+<tr>
+<td align="left">%G</td>
+<td align="left">%F 和 %E 的简写</td>
+</tr>
+<tr>
+<td align="left">%p</td>
+<td align="left">用十六进制数格式化变量的地址</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li>格式化操作符辅助指令:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">定义宽度或者小数点精度</td>
+</tr>
+<tr>
+<td align="left">-</td>
+<td align="left">用做左对齐</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">在正数前面显示加号( + )</td>
+</tr>
+<tr>
+<td align="left"><sp></td>
+<td align="left">在正数前面显示空格</td>
+</tr>
+<tr>
+<td align="left">#</td>
+<td align="left">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’)</td>
+</tr>
+<tr>
+<td align="left">0</td>
+<td align="left">显示的数字前面填充’0’而不是默认的空格</td>
+</tr>
+<tr>
+<td align="left">%</td>
+<td align="left">‘%%’输出一个单一的’%’</td>
+</tr>
+<tr>
+<td align="left">(var)</td>
+<td align="left">映射变量(字典参数)</td>
+</tr>
+<tr>
+<td align="left">m.n.</td>
+<td align="left">m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)</td>
+</tr>
+</tbody></table>
+<p>Python2.6 开始，新增了一种格式化字符串的函数 <a target="_blank" rel="noopener" href="https://www.runoob.com/python/att-string-format.html">str.format()</a>，它增强了字符串格式化的功能。</p>
+<ol start="5">
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/beautiful77moon/article/details/88874541">Python 输出字符串左对齐、右对齐、居中对齐</a></li>
+</ol>
+<ul>
+<li>通过ljust(),center(),rjust()函数实现</li>
+<li>通过format()函数格式化实现</li>
+</ul>
+<ol start="6">
+<li><p>python三引号</p>
+<p>python三引号允许一个字符串跨多行，字符串中可以包含换行符、制表符以及其他特殊字符。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python3</span><br><span class="line"> </span><br><span class="line">para_str = &quot;&quot;&quot;这是一个多行字符串的实例</span><br><span class="line">多行字符串可以使用制表符</span><br><span class="line">TAB ( \t )。</span><br><span class="line">也可以使用换行符 [ \n ]。</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">print (para_str)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这是一个多行字符串的实例</span><br><span class="line">多行字符串可以使用制表符</span><br><span class="line">TAB (    )。</span><br><span class="line">也可以使用换行符 [ </span><br><span class="line"> ]。</span><br></pre></td></tr></table></figure></li>
+<li><p>f-string</p>
+<p>f-string 是 python3.6 之后版本添加的，称之为字面量格式化字符串，是新的格式化字符串的语法。</p>
+<p><strong>f-string</strong> 格式化字符串以 <strong>f</strong> 开头，后面跟着字符串，字符串中的表达式用大括号 {} 包起来，它会将变量或表达式计算后的值替换进去，实例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; name = &#x27;Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; &#x27;Hello %s&#x27; % name</span><br><span class="line">&#x27;Hello Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; f&#x27;Hello &#123;name&#125;&#x27;  # 替换变量</span><br><span class="line">&#x27;Hello Runoob&#x27;</span><br><span class="line">&gt;&gt;&gt; f&#x27;&#123;1+2&#125;&#x27;         # 使用表达式</span><br><span class="line">&#x27;3&#x27;</span><br><span class="line">&gt;&gt;&gt; w = &#123;&#x27;name&#x27;: &#x27;Runoob&#x27;, &#x27;url&#x27;: &#x27;www.runoob.com&#x27;&#125;</span><br><span class="line">&gt;&gt;&gt; f&#x27;&#123;w[&quot;name&quot;]&#125;: &#123;w[&quot;url&quot;]&#125;&#x27;</span><br><span class="line">&#x27;Runoob: www.runoob.com&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>在 Python 3.8 的版本中可以使用 <strong>=</strong> 符号来拼接运算表达式与结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = 1</span><br><span class="line">&gt;&gt;&gt; print(f&#x27;&#123;x+1=&#125;&#x27;)   # Python 3.8</span><br><span class="line">&#x27;x+1=2&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>Unicode 字符串</p>
+<p>在Python2中，普通字符串是以8位ASCII码进行存储的，而Unicode字符串则存储为16位unicode字符串，这样能够表示更多的字符集。使用的语法是在字符串前面加上前缀 <strong>u</strong>。</p>
+<p>在Python3中，所有的字符串都是Unicode字符串。</p>
+</li>
+<li><p>其他内建函数</p>
+</li>
+<li><p>字符串赋值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = &#x27;  hello world!    &#x27;</span><br><span class="line">print(a.strip())</span><br><span class="line">print(a.lstrip())</span><br><span class="line">print(a.rstrip())</span><br><span class="line">c = 1</span><br><span class="line">d = c #c和d实际是对同一个地址的引用, 如果b再被赋值其他值，那么就会为d分配不同的地址</span><br><span class="line">print(&#x27;c的内存地址%d&#x27;% id(c))</span><br><span class="line">print(&#x27;d的内存地址%d&#x27;% id(d))</span><br><span class="line">d = 2</span><br><span class="line">print(&#x27;c的内存地址%d&#x27;% id(c))</span><br><span class="line">print(&#x27;d的内存地址%d&#x27;% id(d))</span><br><span class="line">print(f&#x27;&#123;c=&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hello world!</span><br><span class="line">hello world!    </span><br><span class="line">  hello world!</span><br><span class="line">c的内存地址140724417992352</span><br><span class="line">d的内存地址140724417992352</span><br><span class="line">c的内存地址140724417992352</span><br><span class="line">d的内存地址140724417992384</span><br><span class="line">c=1</span><br></pre></td></tr></table></figure></li>
+<li><p>转义字符串与不转义的字符串相互转化</p>
+<p>如下，通过print()打印出来的不再为转义字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import matplotlib</span><br><span class="line">&gt;&gt;&gt; matplotlib.__file__</span><br><span class="line">&#x27;D:\\Program Files\\python38\\lib\\site-packages\\matplotlib\\__init__.py&#x27;</span><br><span class="line">&gt;&gt;&gt; print(matplotlib.__file__)</span><br><span class="line">D:\Program Files\python38\lib\site-packages\matplotlib\__init__.py</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; print(r&#x27;\n\n\n&#x27;) #不转义字符串变为转义字符串</span><br><span class="line">\n\n\n</span><br><span class="line">&gt;&gt;&gt; r&#x27;\n\n\n&#x27;</span><br><span class="line">&#x27;\\n\\n\\n&#x27;</span><br></pre></td></tr></table></figure></li>
+<li><p>u’string’、r’string’、f-string</p>
+<p>1）字符串前加 u = unicode编码，后面字符串以 Unicode 格式 进行编码，一般用在中文字符串前面，防止因为源码储存格式问题，导致再次使用时出现乱码。</p>
+<p>2）字符串前加 r = raw 原始输入，声明后面的字符串是普通字符串。</p>
+<p>3）f-string，亦称为格式化字符串常量（formatted string literals）。f-string在形式上是以 <code>f</code> 或 <code>F</code> 修饰符引领的字符串（<code>f&#39;xxx&#39;</code> 或 <code>F&#39;xxx&#39;</code>），以大括号 <code>&#123;&#125;</code> 标明被替换的字段；f-string在本质上并不是字符串常量，而是一个在运行时运算求值的表达式。与其功能相同的还有<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#old-string-formatting">%-formatting语句</a>和<a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#str.format"><code>str.format()</code>函数</a></p>
+</li>
+</ol>
+<h3 id="list-列表"><a href="#list-列表" class="headerlink" title="list 列表 []"></a>list 列表 []</h3><ol>
+<li><p>列表中数据可以是任意类型，类型可以混合</p>
+</li>
+<li><p>range() 与list的区别</p>
+<ul>
+<li><p>range()是依次取顺序的数值，一般是用来进行循环迭代用的</p>
+</li>
+<li><p>list是一个列表，里面可以存各种类型</p>
+</li>
+<li><p>range可以强转为list类型</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(type(range(10)))</span><br><span class="line">&lt;class &#x27;range&#x27;&gt;</span><br><span class="line">&gt;&gt;&gt; print(type(list()))</span><br><span class="line">&lt;class &#x27;list&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>range(10)相当与range(0,10)</p>
+<p>range(0,10,2)  最后一个参数是步长</p>
+</li>
+</ol>
+<h5 id="tuple-元组"><a href="#tuple-元组" class="headerlink" title="tuple 元组 ()"></a>tuple 元组 ()</h5><ol>
+<li><p>是一种不可变序列，创建后不能做任何修改，只能查询，或者重新给元组赋值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tupleA = ()</span><br><span class="line">print(id(tupleA))</span><br><span class="line">tupleA = (&#x27;dsaf&#x27;,4 ,124.3, (1,3,6,&#x27;dzh&#x27;))</span><br><span class="line">print(id(tupleA))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2323863699520</span><br><span class="line">2323864166464</span><br></pre></td></tr></table></figure>
+
+<p>可以看到重新赋值后，地址变了，因为元组一旦创建后不能改变，类似c语言常量字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tupleA = (&#x27;dsaf&#x27;,4 ,124.3, [1,3,6,&#x27;dzh&#x27;])</span><br><span class="line">tupleA[3][1] = 666;</span><br><span class="line">print(&#x27;tupleA中嵌套的列表是可以修改的：&#x27;, tupleA)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tupleA中嵌套的列表是可以修改的： (&#x27;dsaf&#x27;, 4, 124.3, [1, 666, 6, &#x27;dzh&#x27;])</span><br></pre></td></tr></table></figure>
+
+<p>元组中嵌套的列表是可以修改的</p>
+</li>
+<li><p>数据项可以是任何的数据类型</p>
+</li>
+<li><p>只有一个数据时，需要写一个逗号，不然会认为是整型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tupleB = (&#x27;peter&#x27;,)</span><br><span class="line">print(&#x27;元组只包含一个元素，最后需要一个逗号，否则不能识别为元组:&#x27;,tupleB)</span><br><span class="line">tupleB = (&#x27;peter&#x27;)</span><br><span class="line">print(tupleB)</span><br><span class="line">print(type((&#x27;peter&#x27;,)))</span><br><span class="line">print(type((&#x27;peter&#x27;)))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">元组只包含一个元素，最后需要一个逗号，否则不能识别为元组: (&#x27;peter&#x27;,)</span><br><span class="line">peter</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>range也可以强转为元组和集合</p>
+</li>
+</ol>
+<h5 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h5><ol>
+<li><p>不属于序列，没有下标概念，无序键值对集合</p>
+</li>
+<li><p>{}来表示字典对象，每个键值对通过逗号分开。</p>
+</li>
+<li><p>通过key访问，key不能重复</p>
+</li>
+<li><p>key不能修改，必须是不可变的类型（元组，字符串等），值可以是任意类型</p>
+</li>
+</ol>
+<h5 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h5><p>参数、返回值、嵌套调用</p>
+<p>调用函数前必须先定义</p>
+<ol>
+<li><p>参数</p>
+<p>传参、调用、不定长参数、缺省参数</p>
+<p>参数类型： 必选参数、默认参数[缺省参数]、可选参数、关键字参数</p>
+<p><strong>缺省参数必须要在参数列表的尾部</strong></p>
+<p><strong>可变参数传递进函数后是一个不能修改的元组</strong></p>
+<p><strong>可变关键字参数传递进函数后是一个字典</strong></p>
+<p><strong>函数定义中可变参数必须放在可变关键字参数之前</strong></p>
+</li>
+<li><p>函数的备注信息</p>
+<p>使用三引号放在函数内部开始</p>
+<p>在pycharm中ctrl键+鼠标停留在函数上，就会显示出函数的备注信息</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def printInfo():</span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    这里写函数的备注信息</span><br><span class="line">    :return: </span><br><span class="line">    &#x27;&#x27;&#x27;</span><br><span class="line">    print(&#x27;dzh的身高是%.2f&#x27; % 1.73)</span><br><span class="line">    print(&#x27;dzh的体重是%.f&#x27; % 160)</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<p>下面是备注显示的信息，可以看到<code>备注</code>信息，函数的<code>返回值</code>是None</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def printInfo() -&gt; None</span><br><span class="line">这里写函数的备注信息</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>关键字参数</p>
+<p>使用** 来定义</p>
+<p>在函数体内参数关键字是一个<code>字典类型</code>，key必须是字符串</p>
+<p>关键字参数可以直接指定实参传递给那个参数，那么就不需要关注变量的顺序。可以传递不定数量的键值对</p>
+<p> 参考：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/2250.html">http://c.biancheng.net/view/2250.html</a></p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">def complexFunc(*args, **kwargs):</span><br><span class="line">    print(args)</span><br><span class="line">    print(kwargs)</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">complexFunc()</span><br><span class="line">complexFunc(1,2,3,4)</span><br><span class="line"># name =&#x27;dzh&#x27;,age=27  传递进入函数后是以字典的形式体现</span><br><span class="line">complexFunc(1,2,3,4,name =&#x27;dzh&#x27;,age=27)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">()</span><br><span class="line">&#123;&#125;</span><br><span class="line">(1, 2, 3, 4)</span><br><span class="line">&#123;&#125;</span><br><span class="line">(1, 2, 3, 4)</span><br><span class="line">&#123;&#x27;name&#x27;: &#x27;dzh&#x27;, &#x27;age&#x27;: 27&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>函数分类</p>
+<p>有参数无返回值</p>
+<p>有参数有返回值</p>
+<p>无参数无返回值</p>
+<p>无参数有返回值</p>
+</li>
+<li><p>函数内部修改全局变量</p>
+<p>要使用global关键字进行声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">globalVar = &#x27;我是全局变量&#x27;</span><br><span class="line">print(&#x27;全局变量修改前：&#x27;, globalVar)</span><br><span class="line">def updataGlobalVar():</span><br><span class="line">    global globalVar</span><br><span class="line">    globalVar = &#x27;更新了全局变量&#x27;</span><br><span class="line">updataGlobalVar()</span><br><span class="line">print(&#x27;全局变量修改后：&#x27;, globalVar)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">全局变量修改前： 我是全局变量</span><br><span class="line">全局变量修改后： 更新了全局变量</span><br></pre></td></tr></table></figure></li>
+<li><p>python中的传参是引用传参不是值传参</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yxtz271828/p/8988176.html">Python中的引用传参</a></p>
+<p>多种传参方式的对比：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38850266/article/details/94058139">值传参，值的引用传参，指针传参（两类），指针的引用传参（两类）</a></p>
+</li>
+<li><p>匿名函数 lambda</p>
+<p>语法：</p>
+<p>​        lambda 参数1，参数2… ：表达式</p>
+<p>特点：</p>
+<p>​        使用lambda关键字创建；没有名字；匿名函数冒号后的表达式有且只有一个，是表达式不是语句；自带return，且返回的结果就是表表达式的值。</p>
+<p>缺点：</p>
+<p>​        lambda缺点：只能是单个表达式，不是一个代码块，设计的目的是为了满足简单函数的场景，仅能封装有限逻辑，复杂逻辑要用def处理</p>
+<ul>
+<li><p>三元运算代替if else双分支操作  b if a else c</p>
+<p>lambda表达式结合三元表达式应用</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">age = 25</span><br><span class="line">print(&#x27;可以参军&#x27; if age &gt; 18 else &#x27;继续上学&#x27;)</span><br><span class="line"></span><br><span class="line">funcTest = lambda age :&#x27;可以参军&#x27; if age &gt; 18 else &#x27;继续上学&#x27;</span><br><span class="line">print(funcTest(15))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可以参军</span><br><span class="line">继续上学</span><br></pre></td></tr></table></figure></li>
+<li><p>序列的内建函数 sort与sorted的区别</p>
+<p>sort()方法是list的内置函数，只能用于列表，sort直接修改原始列表的内容；</p>
+<p>sorted()方法用于可迭代的序列，会返回一个排好序的新的序列。</p>
+</li>
+<li><p>函数语法中参数用中括号（[]）和逗号（,）嵌套表示是何种含义？</p>
+<ul>
+<li>[, a[, b]]：嵌套形式表示 b 是独立于 a 的可选参数，即在传入 a 的情况下，b 可以自由地选择传入或省略。</li>
+<li>[, a, b] ：扁平形式表示 a 与 b 合在一起是一组可选参数，即 a 和 b 必须同时传入或者同时省略，但不能只传入一个</li>
+</ul>
+</li>
+<li><p>python内置函数分类</p>
+<p>数学运算</p>
+<p>类型转换</p>
+<p>序列操作</p>
+<p>集合操作</p>
+</li>
+</ol>
+<h2 id="python模块安装"><a href="#python模块安装" class="headerlink" title="python模块安装"></a>python模块安装</h2><h3 id="pip源配置"><a href="#pip源配置" class="headerlink" title="pip源配置"></a>pip源配置</h3><h4 id="windows配置"><a href="#windows配置" class="headerlink" title="windows配置"></a>windows配置</h4><p>在用户目录下有个pip.ini文件（没有就创建），参考如下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://mirrors.aliyun.com/pypi/simple</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com/pypi</span><br><span class="line">[list]</span><br><span class="line">format=columns</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认配置的是国外的Python官方库，因为国内连接国外的网络比较慢，因此一般都要先将它配置为国内的地址</p>
+</blockquote>
+<ul>
+<li><p> [global]表示所有的模块都使用这个地址来下载</p>
+</li>
+<li><p> [install]表示使用信任这个地址</p>
+</li>
+<li><p> [list]表示模块输出信息的格式</p>
+</li>
+</ul>
+<h4 id="Linux配置"><a href="#Linux配置" class="headerlink" title="Linux配置"></a>Linux配置</h4><h3 id="命令行安装python某块"><a href="#命令行安装python某块" class="headerlink" title="命令行安装python某块"></a>命令行安装python某块</h3><h4 id="安装命令"><a href="#安装命令" class="headerlink" title="安装命令"></a>安装命令</h4><p><code>pip install module_name</code></p>
+<blockquote>
+<p>注意要在window的命令行下安装，而不是在python的命令行</p>
+<p>实际会安装到lib目录，如：<em>D:\Program Files\python38\Lib\site-packages</em></p>
+</blockquote>
+<h3 id="查看本地python类库详细信息"><a href="#查看本地python类库详细信息" class="headerlink" title="查看本地python类库详细信息"></a>查看本地python类库详细信息</h3><ol>
+<li><p>配置了python的环境变量</p>
+</li>
+<li><p>在命令行输入： <code>python -m pydoc -p 1234</code></p>
+<blockquote>
+<p>python -m pydoc 表示打开pydoc模块，该模块用于查python文档</p>
+<p>-p 1234 表示在端口号1234上打开server，端口号可自行设置</p>
+</blockquote>
+</li>
+<li><p>浏览器打开： 127.0.0.1：1234就可以看到文档目录</p>
+</li>
+<li><p>也可以在python命令行通过如下方式找到模块的安装位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import matplotlib</span><br><span class="line">&gt;&gt;&gt; matplotlib.__file__</span><br><span class="line">&#x27;D:\\Program Files\\python38\\lib\\site-packages\\matplotlib\\__init__.py&#x27;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="python数据画图"><a href="#python数据画图" class="headerlink" title="python数据画图"></a>python数据画图</h2><h3 id="相关模块"><a href="#相关模块" class="headerlink" title="相关模块"></a>相关模块</h3><ul>
+<li>Pyecharts</li>
+<li>Matplotlib <a target="_blank" rel="noopener" href="https://matplotlib.org/3.2.2/tutorials/introductory/sample_plots.html">官网</a></li>
+</ul>
+<h3 id="Pyecharts"><a href="#Pyecharts" class="headerlink" title="Pyecharts"></a>Pyecharts</h3><h3 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h3><h4 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">a = [51,226,208,165,202,286,190,212,219,271,36]</span><br><span class="line">plt.plot(a,a*1.5,a,a*2.5,a,a*3.5,a,a*4.5)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h4 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h4><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>面向对象编程：oop[object oriended programming]，关注设计思维</p>
+<p>面向过程编程：按照解决问题的步骤去写代码，根据业务逻辑去写代码</p>
+<h4 id="两种编程模式对比"><a href="#两种编程模式对比" class="headerlink" title="两种编程模式对比"></a>两种编程模式对比</h4><p>面向对象更适合大型项目</p>
+<p>面向过程关注怎么做？面向对象关注谁来做？</p>
+<p>面向过程</p>
+<p>优点：性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、 Linux/Unix等一般采用面向过程开发，性能是最重要的因素。<br>缺点：没有面向对象易维护、易复用、易扩展</p>
+<p>面向对象</p>
+<p>优点：易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统 更加灵活、更加易于维护<br>缺点：性能比面向过程低</p>
+<h4 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h4><p>类是从实际场景中理想抽象的模板，现实世界行为抽到到方法，特征抽象为属性</p>
+<p>对象就是通过模板产生的一个实例</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>类名、属性、行为</p>
+<p>创建类的时候实际上，没有在内存中创建任何空间，当实例化一个对象的时候，会在内存中创建一个对象空间</p>
+<h4 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h4><p>在类的内部，使用def关键字可以定义一个实例方法，与一般函数定义不同，类的方法必须包含参数self，且为第一个参数</p>
+<h4 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h4><p>定义在类中的变量</p>
+<h4 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h4><p>类似实例方法，在方法内部定义的，并且通过类似self.变量名 的形式定义的变量</p>
+<h4 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h4><p>双下划线开始和结尾的方法，python中已经内置好的类的方法</p>
+<p>方法名”__XXX__“</p>
+<h5 id="init-方法"><a href="#init-方法" class="headerlink" title="____init____方法"></a>____init____方法</h5><p>初始化的方法，定义实例属性和初始化实例属性</p>
+<p>实例化对象的时候自动调用，完成 一些初始化设置</p>
+<p>利用传参机制可以方便的实例化一个对象，不用专，门为一个实例手动添加属性</p>
+<h5 id="self"><a href="#self" class="headerlink" title="self"></a>self</h5><p>self和对象指向同一个内存地址，可以认为self是对象的引用，可以理解为对象自己，对谋个对象调用其方法时，python解释器会把这个对象作为第一个参数传递给函数，所以开发者只需要传递后面的参数即可</p>
+<p>只有在类中定义实例方法的时候才有意义，在调用时不必手动传递（但是要用变量来接受），解释器会自动传递</p>
+<p>名字不一定叫self，也可以叫其他，不过约定俗成是self，相当于java中的this</p>
+<p>每个实例函数的第一个参数都是用来接受self对象自己，名字也可以不统一</p>
+<h5 id="new-与-init-区别"><a href="#new-与-init-区别" class="headerlink" title="____new____与____init____区别"></a>____new____与____init____区别</h5><pre><code>__new__ 
+类的实例化方法，必须要返回该实例，否则对象创建失败
+至少有一个参数是cls，代表要实例化的类，此参数在实例化的时由python解释器自动传递
+函数执行new在前，init在后
+__init__
+用来做数据属性的初始化工作，也可以认为是该实例的构造方法，接受类的实例self，并对其进行构造
+</code></pre>
+<h4 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h4><p>一个子类可以同时继承多个父类。</p>
+<p>类的传递过程中，父类又叫基类，子类又叫派生类，父类的方法可以一级一级的传递给子类。多少级都可以传递。一般情况建议不超过三级</p>
+<h4 id="重写方法"><a href="#重写方法" class="headerlink" title="重写方法"></a>重写方法</h4><p>子类中有同名方法，子类的可以覆盖父类的，覆盖的顺序实际上与继承的顺序是对应的</p>
+<p>父类的方法无法满足子类的需要，那么子类就可以重写父类的方法，或者晚上父类的方法</p>
+<p>子类中调用父类方法可以使用父类名手动调用，也可以使用super() 方法自动的去找父类的方法，如果有多个父类，就逐个去找，知道找到为止；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://duan-zhenghong.github.io/dzh.github.io/dzh.github.io/2021/07/11/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/dzh.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="徵弘's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/dzh.github.io/2021/07/11/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-11T21:41:03+08:00">
+                2021-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
-        <div class="sidebar-panel-tags">
-    <div class="sidebar-tags-name">
+
+  <aside id="sidebar" class="sidebar">
     
-        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
-    
-        <span class="sidebar-tag-name" data-tags="vscode"><span class="iconfont-archer">&#xe606;</span>vscode</span>
-    
-        <span class="sidebar-tag-name" data-tags="linux"><span class="iconfont-archer">&#xe606;</span>linux</span>
-    
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
-    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/dzh.github.io/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
     </div>
-    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
-    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
-    缺失模块。<br/>
-    1、请确保node版本大于6.2<br/>
-    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
-    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
-    3、在根目录_config.yml里添加配置：
-    <pre style="color: #787878; font-size: 0.6rem;">
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: false
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true</pre>
-    </div> 
-    <div class="sidebar-tags-list"></div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dzh</span>
+
+  
 </div>
-        <div class="sidebar-panel-categories">
-    <div class="sidebar-categories-name">
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
     
-    </div>
-    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
-    <div class="sidebar-categories-list"></div>
-</div>
-    </div>
-</div> 
-    <script>
-    var siteMeta = {
-        root: "/dzh.github.io/",
-        author: "dzh"
-    }
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
-    <!-- CDN failover -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script type="text/javascript">
-        if (typeof window.$ === 'undefined')
-        {
-            console.warn('jquery load from jsdelivr failed, will load local script')
-            document.write('<script src="/dzh.github.io/lib/jquery.min.js">\x3C/script>')
-        }
-    </script>
-    <script src="/dzh.github.io/scripts/main.js"></script>
-    <!-- algolia -->
-    
-    <!-- busuanzi  -->
-    
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <!-- CNZZ  -->
-    
-    </div>
-    <!-- async load share.js -->
-     
-    </body>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/dzh.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/dzh.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/dzh.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/dzh.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/dzh.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/dzh.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/dzh.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/dzh.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/dzh.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>
-
-
